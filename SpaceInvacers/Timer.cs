@@ -16,6 +16,7 @@ namespace SpaceInvacers
 		{
 			tickTime = milisegundos * TimeSpan.TicksPerMillisecond;
 			ultimoTick = DateTime.Now.Ticks;
+			ticked = true;
 		}
 
 		public Timer() : this(500) { }

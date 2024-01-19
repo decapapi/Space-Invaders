@@ -100,17 +100,28 @@ namespace SpaceInvacers
 		{
 			Pantalla.Limpiar();
 			Pantalla.DibujarMarco();
-			Pantalla.TextoCentrado("G A M E   O V E R", 8, ConsoleColor.Red);
-			Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 10);
 
-			ConsoleKey tecla;
+			Timer timer = new Timer(1000);
+
+			ConsoleKey tecla = ConsoleKey.None;
 			do {
-				tecla = Console.ReadKey(true).Key;
-			} while (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter);
+				if (Console.KeyAvailable)
+					tecla = Console.ReadKey(true).Key;
+
+				if (timer.GetTicked()) {
+					Pantalla.ActualizarFondo();
+					Pantalla.DibujarFondo();
+					Pantalla.TextoCentrado("G A M E   O V E R", 8, ConsoleColor.Red);
+					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 10);
+				}
+
+				timer.Actualizar();
+			} while (tecla == ConsoleKey.None || (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter));
+
+			Pantalla.Limpiar();
 
 			if (tecla == ConsoleKey.Enter)
 			{
-				Pantalla.Limpiar();
 				Juego juego = new Juego();
 				juego.Lanzar();
 			}

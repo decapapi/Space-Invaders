@@ -8,6 +8,15 @@ namespace SpaceInvacers
 {
 	class Pantalla
 	{
+		struct Caracter {
+			public char imagen;
+			public bool haCambiado;
+		}
+
+		private static Caracter[,] fondo;
+
+		private static char[] estrellitas = { '\u2605', '\u2734' };
+
 		public static void TextoCentrado(string texto, int y, ConsoleColor color = ConsoleColor.White)
 		{
 			int consoleWidth = Console.BufferWidth;
@@ -28,6 +37,56 @@ namespace SpaceInvacers
 				Console.Write(texto);
 				Console.ResetColor();
 			}
+		}
+
+		public static void CrearFondo()
+		{
+			fondo = new Caracter[Console.BufferHeight - 2, Console.BufferWidth - 2];
+
+			Random random = new Random();
+
+			for (int i = 1; i < fondo.GetLength(0); i++)
+				for (int j = 1; j < fondo.GetLength(1); j++) {
+					if (random.Next(1, 100) > 90)
+						if (random.Next(1, 100) > 90)
+							fondo[i, j].imagen = estrellitas[random.Next(0, estrellitas.Length - 1)];
+						else
+							fondo[i, j].imagen = '.';
+					else
+						fondo[i, j].imagen = ' ';
+				}
+		}
+
+		public static void ActualizarFondo()
+		{
+			Random random = new Random();
+
+			for (int i = 1; i < fondo.GetLength(0); i++)
+				for (int j = 1; j < fondo.GetLength(1); j++) {
+					if (random.Next(1, 100) > 95) {
+						char imagenAntigua = fondo[i, j].imagen;
+						if (random.Next(1, 100) > 90)
+							if (random.Next(1, 100) > 90)
+								fondo[i ,j].imagen = estrellitas[random.Next(0, estrellitas.Length - 1)];
+							else
+								fondo[i, j].imagen = '.';
+						else
+							fondo[i, j].imagen = ' ';
+
+						fondo[i, j].haCambiado = imagenAntigua != fondo[i, j].imagen;
+					}
+				}
+		}
+
+		public static void DibujarFondo()
+		{
+			for (int i = 1; i < fondo.GetLength(0); i++)
+				for (int j = 1; j < fondo.GetLength(1); j++) {
+					if (!fondo[i, j].haCambiado)
+						continue;
+					Console.SetCursorPosition(j, i);
+					Console.Write(fondo[i ,j].imagen);
+				}
 		}
 
 		public static void DibujarMarco()

@@ -32,8 +32,7 @@ namespace SpaceInvacers
 			Bienvenida bienvenida = new Bienvenida();
 			bienvenida.Lanzar();
 
-			if (!bienvenida.GetSalir())
-			{
+			if (!bienvenida.GetSalir()) {
 				Partida partida = new Partida();
 				partida.Lanzar();
 			}

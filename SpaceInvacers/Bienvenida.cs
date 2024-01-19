@@ -12,13 +12,24 @@ namespace SpaceInvacers
 
 		public void Lanzar()
 		{
-			Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 10);
-			Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", 12);
+			Pantalla.CrearFondo();
+			Pantalla.DibujarFondo();
 
-			ConsoleKey tecla;
+			Timer timer = new Timer(1000);
+
+			ConsoleKey tecla = ConsoleKey.None;
 			do {
-				tecla = Console.ReadKey(true).Key;
-			} while (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter);
+				if (Console.KeyAvailable)
+					tecla = Console.ReadKey(true).Key;
+
+				if (timer.GetTicked()) {
+					Pantalla.ActualizarFondo();
+					Pantalla.DibujarFondo();
+					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 10);
+					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", 12);
+				}
+				timer.Actualizar();
+			} while (tecla == ConsoleKey.None || (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter));
 
 			Pantalla.Limpiar();
 			this.salir = tecla == ConsoleKey.Escape;
