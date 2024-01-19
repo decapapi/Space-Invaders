@@ -33,7 +33,7 @@ namespace SpaceInvacers
 
 		public void ConsumirVidar()
 		{
-			if (this.vidas >= 0)
+			if (this.vidas > 0)
 				this.vidas--;
 
 			this.Actuallizar();
@@ -59,7 +59,7 @@ namespace SpaceInvacers
 			Pantalla.Texto(this.vidas.ToString(), 1, Console.BufferHeight - 1);
 			Pantalla.Texto(new String(' ', 9), 2, Console.BufferHeight - 1);
 			string vidasString = "";
-			for (int i = 0; i < this.vidas; i++)
+			for (int i = 1; i < this.vidas; i++)
 				vidasString += "\u15B9\u15BA ";
 			Pantalla.Texto(vidasString, 3, Console.BufferHeight - 1, ConsoleColor.Green);
 		}

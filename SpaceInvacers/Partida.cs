@@ -91,7 +91,7 @@ namespace SpaceInvacers
 
 				}
 
-			} while (tecla != ConsoleKey.Escape && marcador.GetVidas() >= 0);
+			} while (tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
 
 			MostrarGameOver();
 		}
