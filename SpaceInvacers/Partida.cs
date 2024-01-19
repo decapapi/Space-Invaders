@@ -93,12 +93,17 @@ namespace SpaceInvacers
 
 			} while (tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
 
-			MostrarGameOver();
+			Pantalla.Limpiar();
+
+			if (tecla != ConsoleKey.Escape)
+				MostrarGameOver();
+
+			Juego juego = new Juego();
+			juego.Lanzar();
 		}
 
 		private void MostrarGameOver()
 		{
-			Pantalla.Limpiar();
 			Pantalla.DibujarMarco();
 
 			Timer timer = new Timer(1000);
@@ -120,8 +125,7 @@ namespace SpaceInvacers
 
 			Pantalla.Limpiar();
 
-			if (tecla == ConsoleKey.Enter)
-			{
+			if (tecla == ConsoleKey.Enter) {
 				Juego juego = new Juego();
 				juego.Lanzar();
 			}

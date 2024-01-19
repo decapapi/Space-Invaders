@@ -46,9 +46,9 @@ namespace SpaceInvacers
 
 		private void MostrarPuntuacion()
 		{
-			Pantalla.Texto("SCORE <1>", 2, 1);
+			Pantalla.Texto("SCORE <1>", 3, 1);
 			Pantalla.TextoCentrado("HI-SCORE", 1);
-			Pantalla.Texto("SCORE <2>", Console.BufferWidth - 11, 1);
+			Pantalla.Texto("SCORE <2>", Console.BufferWidth - 12, 1);
 
 			Pantalla.Texto(this.puntuacion.ToString("D5"), 4, 2); 
 			Pantalla.TextoCentrado(highScore.ToString("D5"), 2);
