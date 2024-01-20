@@ -53,13 +53,13 @@ namespace SpaceInvacers
 
 		public void MoverProyectil()
 		{
-			if (this.proyectil.GetActivo())
+			if (this.proyectil.Activo)
 				this.proyectil.Mover(true);
 		}
 
 		public bool ComprobarColisionProyectil(Nave nave)
 		{
-			if (this.proyectil.GetActivo())
+			if (this.proyectil.Activo)
 				if (this.proyectil.Colisiona(nave)) {
 					this.proyectil.Destruir();
 					return true;
@@ -75,11 +75,11 @@ namespace SpaceInvacers
 			do {
 				fila = random.Next(0, 3);
 				columna = random.Next(0, 10);
-			} while (!this.enemigos[fila, columna].GetActivo());
+			} while (!this.enemigos[fila, columna].Activo);
 
 			Enemigo enemigo = this.enemigos[fila, columna];
 
-			if (!this.proyectil.GetActivo())
+			if (!this.proyectil.Activo)
 				this.proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
 		}
 
@@ -87,9 +87,9 @@ namespace SpaceInvacers
 		{
 			for (int i = 0; i < this.enemigos.GetLength(0); i++)
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
-					if (this.enemigos[i, j].GetActivo())
+					if (this.enemigos[i, j].Activo)
 						if (proyectil.Colisiona(this.enemigos[i, j])) {
-							this.enemigos[i, j].Eliminar();
+							this.enemigos[i, j].Destruir();
 							proyectil.Destruir();
 							return true;
 						}
@@ -100,7 +100,7 @@ namespace SpaceInvacers
 		{
 			for (int i = 0; i < this.enemigos.GetLength(0); i++)
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
-					if (this.enemigos[i, j].GetActivo())
+					if (this.enemigos[i, j].Activo)
 						this.enemigos[i, j].Dibujar();
 		}	
 	}

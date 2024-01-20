@@ -39,7 +39,7 @@ namespace SpaceInvacers
 				foreach (Timer timer in timers)
 					timer.Actualizar();
 
-				if (proyectil.GetActivo()) {
+				if (proyectil.Activo) {
 					timerActualizarDisparo.Actualizar();
 					if (timerActualizarDisparo.GetTicked())
 						proyectil.Mover(false);
@@ -58,7 +58,7 @@ namespace SpaceInvacers
 				switch (tecla) {
 					case ConsoleKey.LeftArrow: nave.MoverIzquierda(); break;
 					case ConsoleKey.Spacebar:
-						if (!proyectil.GetActivo())
+						if (!proyectil.Activo)
 							proyectil.Disparar(nave.GetX(), nave.GetY());
 						break;
 					case ConsoleKey.RightArrow: nave.MoverDerecha(); break;
@@ -79,7 +79,7 @@ namespace SpaceInvacers
 				if (bloqueDeEnemigos.ComprobarColisionProyectil(nave))
 					marcador.ConsumirVidar();
 
-				if (proyectil.GetActivo()) {
+				if (proyectil.Activo) {
 					if (bloqueDeEnemigos.ComprobarColisiones(proyectil))
 						marcador.IncrementarPuntuacion(10);
 

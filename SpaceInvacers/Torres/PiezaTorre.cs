@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace SpaceInvacers
 {
-	class PiezaTorre : Sprite
+	class PiezaTorre : Sprite, IDestructible
 	{
 		private bool activo = true;
 
 		public PiezaTorre(int x, int y) : base(x, y, "\u2592", ConsoleColor.Green) { }
 
-		public bool GetActivo() { return this.activo; }
+		public bool Activo
+		{
+			get { return this.activo; }
+			set { this.activo = value; }
+		}
 
 		public void Destruir()
 		{

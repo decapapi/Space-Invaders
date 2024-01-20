@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceInvacers
 {
-	class Proyectil : Sprite
+	class Proyectil : Sprite, IDestructible
 	{
 		private bool activo;
 
@@ -15,17 +15,23 @@ namespace SpaceInvacers
 			this.activo = false;
 		}
 
-		public void Disparar(int x, int y)
+		public bool Activo
 		{
-			this.x = x;
-			this.y = y;
-			this.activo = true;
+			get { return this.activo; }
+			set { this.activo = value; }
 		}
 
 		public void Destruir()
 		{
 			this.Borrar();
 			this.activo = false;
+		}
+
+		public void Disparar(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+			this.activo = true;
 		}
 
 		public void Mover(bool positivo)
@@ -37,11 +43,6 @@ namespace SpaceInvacers
 
 			base.Mover(this.x, this.y + (positivo ? 1 : -1));
 			base.Dibujar();
-		}
-
-		public bool GetActivo()
-		{
-			return activo;
 		}
 	}
 }

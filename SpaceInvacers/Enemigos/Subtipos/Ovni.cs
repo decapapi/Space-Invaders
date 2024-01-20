@@ -12,7 +12,7 @@ namespace SpaceInvacers
 
         public Ovni(int x, int y, string imagen, ConsoleColor color) : base(x, y, imagen, color)
         {
-            activo = false;
+			this.activo = false;
         }
 
         public Ovni() : this(1, 4, "\u0F3A\u1d16\u0F3B", ConsoleColor.Red) { }
@@ -21,31 +21,31 @@ namespace SpaceInvacers
         {
             Random random = new Random();
 
-            if (!activo && random.Next(1, 100) > 95)
+            if (!this.activo && random.Next(1, 100) > 95)
                 return;
 
-            activo = true;
+			this.activo = true;
 
             bool puedeMoverDerecha = true;
             bool puedeMoverIzquierda = true;
 
-            if (x == Console.BufferWidth - Imagen.Length)
+            if (this.x == Console.BufferWidth - this.Imagen.Length)
                 puedeMoverDerecha = false;
 
-            if (x == 0)
+            if (this.x == 0)
                 puedeMoverIzquierda = false;
 
             if (random.Next(1, 10) <= 5 && puedeMoverDerecha)
-                MoverDerecha();
+				this.MoverDerecha();
             else if (puedeMoverIzquierda)
-                MoverIzquierda();
+				this.MoverIzquierda();
         }
 
-        public void Destruir()
+        public new void Destruir()
         {
-            Borrar();
-            activo = false;
-            x = 1;
+            this.Borrar();
+			this.activo = false;
+			this.x = 1;
         }
 
         public bool GetActivo()

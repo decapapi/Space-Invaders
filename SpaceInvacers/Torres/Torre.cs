@@ -21,7 +21,7 @@ namespace SpaceInvacers
 		{
 			for (int i = 0; i < this.piezas.GetLength(0); i++)
 				for (int j = 0; j < this.piezas.GetLength(1); j++)
-					if (this.piezas[i, j].GetActivo())
+					if (this.piezas[i, j].Activo)
 						this.piezas[i, j].Dibujar();
 		}
 	}

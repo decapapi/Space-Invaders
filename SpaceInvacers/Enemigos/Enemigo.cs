@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceInvacers
 {
-	class Enemigo : Sprite
+	class Enemigo : Sprite, IDestructible
 	{
 		private bool activo = true;
 
@@ -15,9 +15,13 @@ namespace SpaceInvacers
 		public void MoverDerecha() { base.Mover(x+1, y); }
 		public void MoverIzquierda() { base.Mover(x-1, y); }
 
-		public bool GetActivo() { return this.activo; }
+		public bool Activo 
+		{ 
+			get { return this.activo; } 
+			set { this.activo = value; }
+		}
 
-		public void Eliminar()
+		public void Destruir()
 		{ 
 			this.activo = false; 
 			this.Borrar();
