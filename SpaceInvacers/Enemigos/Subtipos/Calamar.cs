@@ -8,6 +8,6 @@ namespace SpaceInvacers
 {
     class Calamar : Enemigo
     {
-        public Calamar(int x, int y) : base(x, y, "{}", ConsoleColor.Magenta) { }
+        public Calamar(int x, int y) : base(x, y, "\u15A7\u15A8", ConsoleColor.Magenta) { }
     }
 }

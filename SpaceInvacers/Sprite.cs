@@ -55,13 +55,11 @@ namespace SpaceInvacers
 
 		public bool Colisiona(Sprite otro)
 		{
-			if (this.y != otro.y) return false;
+			if (this.y != otro.y)
+				return false;
 
-			if (this.x <= otro.x + otro.Imagen.Length - 1 &&
-				this.x + this.Imagen.Length - 1 >= otro.x)
-				return true;
-
-			return false;
+			return this.x <= otro.x + otro.Imagen.Length - 1 &&
+					this.x + this.Imagen.Length - 1 >= otro.x;
 		}
 
 		public bool EstaEntreLimites(int x, int y)

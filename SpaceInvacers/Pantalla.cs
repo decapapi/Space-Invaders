@@ -123,7 +123,7 @@ namespace SpaceInvacers
 				Console.Write(new string(' ', Console.BufferWidth - 2));
 			}
 			Console.SetCursorPosition(0, Console.BufferHeight - 1);
-			Console.Write(new string(' ', Console.BufferWidth - 2));
+			Console.Write(new string(' ', Console.BufferWidth - 3));
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace SpaceInvacers
             activo = false;
         }
 
-        public Ovni() : this(1, 4, "<^>", ConsoleColor.Red) { }
+        public Ovni() : this(1, 4, "\u0F3A\u1d16\u0F3B", ConsoleColor.Red) { }
 
         public void Mover()
         {

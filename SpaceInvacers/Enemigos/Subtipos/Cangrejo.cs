@@ -8,6 +8,6 @@ namespace SpaceInvacers
 {
     class Cangrejo : Enemigo
     {
-        public Cangrejo(int x, int y) : base(x, y, "\u15A7\u15A8", ConsoleColor.Cyan) { }
+        public Cangrejo(int x, int y) : base(x, y, "\u14FF\u1502", ConsoleColor.Cyan) { }
     }
 }

@@ -10,7 +10,7 @@ namespace SpaceInvacers
 	{
 		private bool activo = true;
 
-		public PiezaTorre(int x, int y) : base(x, y, "\u2635", ConsoleColor.Green) { }
+		public PiezaTorre(int x, int y) : base(x, y, "\u2592", ConsoleColor.Green) { }
 
 		public bool GetActivo() { return this.activo; }
 
