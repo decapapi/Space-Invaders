@@ -12,6 +12,7 @@ namespace SpaceInvacers
 		private Enemigo[,] enemigos = new Enemigo[3, 10];
 		public Proyectil Proyectil { get; }
 		private bool moviendoIzquierda = false;
+		private bool bajar = false;
 
 		public BloqueDeEnemigos()
 		{
@@ -28,27 +29,38 @@ namespace SpaceInvacers
 		{
 			bool puedeMoverDerecha = !this.moviendoIzquierda;
 			bool puedeMoverIzquierda = true;
+			bool bajar = false;
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
 				Enemigo ultimoEnemigo = this.enemigos[i, this.enemigos.GetLength(1) - 1];
 				Enemigo primerEnemigo = this.enemigos[i, 0];
 
-				if (ultimoEnemigo.GetX() >= (Console.BufferWidth - ultimoEnemigo.Imagen.Length) - 1)
+				if (ultimoEnemigo.GetX() >= (Console.BufferWidth - ultimoEnemigo.Imagen.Length) - 1) {
 					puedeMoverDerecha = false;
+					this.bajar = !this.bajar;
+				}
 
 				if (primerEnemigo.GetX() == 1) {
 					this.moviendoIzquierda = false;
 					puedeMoverIzquierda = false;
+					puedeMoverDerecha = true;
+					this.bajar = !this.bajar;
 				}
 			}
 
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
-				for (int j = 0; j < this.enemigos.GetLength(1); j++)
+				for (int j = 0; j < this.enemigos.GetLength(1); j++) {
+					if (bajar) {
+						this.enemigos[i, j].Bajar();
+						continue;
+					}
 					if (puedeMoverDerecha && !this.moviendoIzquierda)
 						this.enemigos[i, j].MoverDerecha();
 					else if (puedeMoverIzquierda) {
 						this.moviendoIzquierda = true;
 						this.enemigos[i, j].MoverIzquierda();
 					}
+
+				}
 			}
 		}
 

@@ -14,6 +14,8 @@ namespace SpaceInvacers
 
 		public void MoverDerecha() { base.Mover(x+1, y); }
 		public void MoverIzquierda() { base.Mover(x-1, y); }
+		public void Subir() { base.Mover(x, y-1); }
+		public void Bajar() { base.Mover(x, y+1); }
 
 		public bool Activo 
 		{ 

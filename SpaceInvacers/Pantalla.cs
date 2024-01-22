@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,6 +81,7 @@ namespace SpaceInvacers
 
 		public static void DibujarFondo()
 		{
+			Console.ForegroundColor = ConsoleColor.DarkGray;
 			for (int i = 1; i < fondo.GetLength(0); i++)
 				for (int j = 1; j < fondo.GetLength(1); j++) {
 					if (!fondo[i, j].haCambiado)
@@ -87,6 +89,7 @@ namespace SpaceInvacers
 					Console.SetCursorPosition(j, i);
 					Console.Write(fondo[i ,j].imagen);
 				}
+			Console.ResetColor();
 		}
 
 		public static void DibujarMarco()
