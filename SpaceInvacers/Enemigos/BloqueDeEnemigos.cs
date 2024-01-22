@@ -10,7 +10,7 @@ namespace SpaceInvacers
     class BloqueDeEnemigos
 	{
 		private Enemigo[,] enemigos = new Enemigo[3, 10];
-		private Proyectil proyectil = new Proyectil();
+		public Proyectil Proyectil { get; }
 		private bool moviendoIzquierda = false;
 
 		public BloqueDeEnemigos()
@@ -21,6 +21,7 @@ namespace SpaceInvacers
 				this.enemigos[1, i] = new Cangrejo(x, 7);
 				this.enemigos[2, i] = new Pulpo(x, 8);
 			}
+			this.Proyectil = new Proyectil();
 		}
 
 		public void Mover()
@@ -53,15 +54,15 @@ namespace SpaceInvacers
 
 		public void MoverProyectil()
 		{
-			if (this.proyectil.Activo)
-				this.proyectil.Mover(true);
+			if (this.Proyectil.Activo)
+				this.Proyectil.Mover(true);
 		}
 
 		public bool ComprobarColisionProyectil(Nave nave)
 		{
-			if (this.proyectil.Activo)
-				if (this.proyectil.Colisiona(nave)) {
-					this.proyectil.Destruir();
+			if (this.Proyectil.Activo)
+				if (this.Proyectil.Colisiona(nave)) {
+					this.Proyectil.Destruir();
 					return true;
 				}
 			return false;
@@ -79,8 +80,8 @@ namespace SpaceInvacers
 
 			Enemigo enemigo = this.enemigos[fila, columna];
 
-			if (!this.proyectil.Activo)
-				this.proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
+			if (!this.Proyectil.Activo)
+				this.Proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
 		}
 
 		public bool ComprobarColisiones(Proyectil proyectil)
@@ -94,7 +95,7 @@ namespace SpaceInvacers
 							return true;
 						}
 			return false;
-		}	
+		}
 
 		public void Dibujar()
 		{
@@ -102,6 +103,6 @@ namespace SpaceInvacers
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
 					if (this.enemigos[i, j].Activo)
 						this.enemigos[i, j].Dibujar();
-		}	
+		}
 	}
 }

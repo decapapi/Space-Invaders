@@ -79,6 +79,12 @@ namespace SpaceInvacers
 				if (bloqueDeEnemigos.ComprobarColisionProyectil(nave))
 					marcador.ConsumirVidar();
 
+				if (bloqueDeTorres.Colisionan(proyectil))
+					proyectil.Destruir();
+
+				if (bloqueDeTorres.Colisionan(bloqueDeEnemigos.Proyectil))
+					bloqueDeEnemigos.Proyectil.Destruir();
+
 				if (proyectil.Activo) {
 					if (bloqueDeEnemigos.ComprobarColisiones(proyectil))
 						marcador.IncrementarPuntuacion(10);

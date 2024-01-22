@@ -24,5 +24,10 @@ namespace SpaceInvacers
 					if (this.piezas[i, j].Activo)
 						this.piezas[i, j].Dibujar();
 		}
+
+		public PiezaTorre[,] GetPiezas()
+		{
+			return piezas;
+		}
 	}
 }
