@@ -21,7 +21,7 @@ namespace SpaceInvacers
 			set { this.activo = value; }
 		}
 
-		public void Destruir()
+		public virtual void Destruir()
 		{ 
 			this.activo = false; 
 			this.Borrar();

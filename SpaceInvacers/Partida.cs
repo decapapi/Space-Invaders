@@ -21,7 +21,7 @@ namespace SpaceInvacers
 			List<Timer> timers = new List<Timer>();
 
 			Timer timerBloque = new Timer(800);
-			Timer timerMoverOvni = new Timer(1000);
+			Timer timerMoverOvni = new Timer(150);
 			Timer timerDisparoEnemigo = new Timer(1500);
 			Timer timerActualizarDisparoEnemigo = new Timer(40);
 

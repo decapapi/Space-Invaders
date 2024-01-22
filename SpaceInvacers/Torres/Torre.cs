@@ -8,7 +8,7 @@ namespace SpaceInvacers
 {
 	class Torre
 	{
-		PiezaTorre[,] piezas = new PiezaTorre[2, 10];
+		private PiezaTorre[,] piezas = new PiezaTorre[2, 10];
 
 		public Torre(int x, int y)
 		{

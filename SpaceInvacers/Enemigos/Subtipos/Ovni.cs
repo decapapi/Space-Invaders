@@ -9,43 +9,48 @@ namespace SpaceInvacers
     class Ovni : Enemigo
     {
         private bool activo;
+        private int direccion;
+		private Random random;
 
-        public Ovni(int x, int y, string imagen, ConsoleColor color) : base(x, y, imagen, color)
+		public Ovni(int x, int y, string imagen, ConsoleColor color) : base(x, y, imagen, color)
         {
 			this.activo = false;
+            this.direccion = 0;
+            this.random = new Random();
         }
-
+        
         public Ovni() : this(1, 4, "\u0F3A\u1d16\u0F3B", ConsoleColor.Red) { }
 
         public void Mover()
         {
-            Random random = new Random();
-
-            if (!this.activo && random.Next(1, 100) > 95)
+            if (!this.activo && random.Next(1, 1000) <= 990)
                 return;
 
 			this.activo = true;
 
-            bool puedeMoverDerecha = true;
-            bool puedeMoverIzquierda = true;
+            if (this.direccion == 0) { // No se está moviendo
+                int dir = random.Next(1, 100) <= 50 ? -1 : 1;
+				this.direccion = dir;
+                this.x = dir > 0 ? 1 : Console.BufferWidth - this.Imagen.Length - 3; 
+			}
 
-            if (this.x == Console.BufferWidth - this.Imagen.Length)
-                puedeMoverDerecha = false;
+            if (this.direccion > 0 && this.x == Console.BufferWidth - this.Imagen.Length - 1
+				 || this.direccion < 0 && this.x == 1) {
+                this.Destruir();
+                return;
+            }
 
-            if (this.x == 0)
-                puedeMoverIzquierda = false;
-
-            if (random.Next(1, 10) <= 5 && puedeMoverDerecha)
-				this.MoverDerecha();
-            else if (puedeMoverIzquierda)
+            if (direccion > 0)
+                this.MoverDerecha();
+            else
 				this.MoverIzquierda();
-        }
+		}
 
-        public new void Destruir()
+        public override void Destruir()
         {
             this.Borrar();
 			this.activo = false;
-			this.x = 1;
+			this.direccion = 0;
         }
 
         public bool GetActivo()
