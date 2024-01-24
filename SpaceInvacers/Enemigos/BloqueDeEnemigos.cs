@@ -29,7 +29,6 @@ namespace SpaceInvacers
 		{
 			bool puedeMoverDerecha = !this.moviendoIzquierda;
 			bool puedeMoverIzquierda = true;
-			bool bajar = false;
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
 				Enemigo ultimoEnemigo = this.enemigos[i, this.enemigos.GetLength(1) - 1];
 				Enemigo primerEnemigo = this.enemigos[i, 0];
@@ -49,7 +48,7 @@ namespace SpaceInvacers
 
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
 				for (int j = 0; j < this.enemigos.GetLength(1); j++) {
-					if (bajar) {
+					if (this.bajar) {
 						this.enemigos[i, j].Bajar();
 						continue;
 					}
