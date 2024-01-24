@@ -25,7 +25,7 @@ namespace SpaceInvacers
 			MostrarVidas();
 		}
 
-		public void IncrementarPuntuacion(int puntos)
+		public void ActualizarPuntuacion(int puntos)
 		{
 			this.puntuacion += puntos;
 			this.Actuallizar();

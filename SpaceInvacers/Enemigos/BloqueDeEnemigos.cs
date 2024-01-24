@@ -69,16 +69,6 @@ namespace SpaceInvacers
 				this.Proyectil.Mover(true);
 		}
 
-		public bool ComprobarColisionProyectil(Nave nave)
-		{
-			if (this.Proyectil.Activo)
-				if (this.Proyectil.Colisiona(nave)) {
-					this.Proyectil.Destruir();
-					return true;
-				}
-			return false;
-		}
-
 		public void Disparar()
 		{
 			Random random = new Random();
@@ -95,7 +85,7 @@ namespace SpaceInvacers
 				this.Proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
 		}
 
-		public bool ComprobarColisiones(Proyectil proyectil)
+		public bool ColisionaCon(Proyectil proyectil)
 		{
 			for (int i = 0; i < this.enemigos.GetLength(0); i++)
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
@@ -105,6 +95,35 @@ namespace SpaceInvacers
 							proyectil.Destruir();
 							return true;
 						}
+			return false;
+		}
+
+		public bool ColisionaCon(Nave nave)
+		{
+			for (int i = 0; i < this.enemigos.GetLength(0); i++)
+				for (int j = 0; j < this.enemigos.GetLength(1); j++)
+					if (this.enemigos[i, j].Activo)
+						if (nave.Colisiona(this.enemigos[i, j]))
+							return true;
+			return false;
+		}
+
+		public bool ColisionaCon(BloqueDeTorres torres) {
+			for (int i = 0; i < this.enemigos.GetLength(0); i++)
+				for (int j = 0; j < this.enemigos.GetLength(1); j++) {
+					if (this.enemigos[i, j].Activo)
+						torres.Colisionan(this.enemigos[i, j]);
+				}
+			return false;
+		}
+
+		public bool ProyectilColisionaCon(Nave nave)
+		{
+			if (this.Proyectil.Activo)
+				if (this.Proyectil.Colisiona(nave)) {
+					this.Proyectil.Destruir();
+					return true;
+				}
 			return false;
 		}
 

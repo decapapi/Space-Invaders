@@ -76,8 +76,14 @@ namespace SpaceInvacers
 				if (timerDisparoEnemigo.GetTicked())
 					bloqueDeEnemigos.Disparar();
 
-				if (bloqueDeEnemigos.ComprobarColisionProyectil(nave))
+				if (bloqueDeEnemigos.ProyectilColisionaCon(nave))
 					marcador.ConsumirVidar();
+
+				if (bloqueDeEnemigos.ColisionaCon(bloqueDeTorres))
+					marcador.ActualizarPuntuacion(-20);
+
+				if (bloqueDeEnemigos.ColisionaCon(nave))
+					break;
 
 				if (bloqueDeTorres.Colisionan(proyectil))
 					proyectil.Destruir();
@@ -86,13 +92,13 @@ namespace SpaceInvacers
 					bloqueDeEnemigos.Proyectil.Destruir();
 
 				if (proyectil.Activo) {
-					if (bloqueDeEnemigos.ComprobarColisiones(proyectil))
-						marcador.IncrementarPuntuacion(10);
+					if (bloqueDeEnemigos.ColisionaCon(proyectil))
+						marcador.ActualizarPuntuacion(10);
 
 					if (ovni.GetActivo() && ovni.Colisiona(proyectil)) {
 						ovni.Destruir();
 						proyectil.Destruir();
-						marcador.IncrementarPuntuacion(50);
+						marcador.ActualizarPuntuacion(50);
 					}
 
 				}
