@@ -48,7 +48,7 @@ namespace SpaceInvacers
 		{
 			Pantalla.Texto("SCORE <1>", 3, 1);
 			Pantalla.TextoCentrado("HI-SCORE", 1);
-			Pantalla.Texto("SCORE <2>", Console.BufferWidth - 12, 1);
+			Pantalla.Texto("SCORE <2>", Pantalla.SizeX - 12, 1);
 
 			Pantalla.Texto(this.puntuacion.ToString("D5"), 4, 2); 
 			Pantalla.TextoCentrado(highScore.ToString("D5"), 2);
@@ -56,12 +56,12 @@ namespace SpaceInvacers
 
 		private void MostrarVidas()
 		{
-			Pantalla.Texto(this.vidas.ToString(), 1, Console.BufferHeight - 1);
-			Pantalla.Texto(new String(' ', 9), 2, Console.BufferHeight - 1);
+			Pantalla.Texto(this.vidas.ToString(), 1, Pantalla.SizeY - 1);
+			Pantalla.Texto(new String(' ', 9), 2, Pantalla.SizeY - 1);
 			string vidasString = "";
 			for (int i = 1; i < this.vidas; i++)
 				vidasString += "\u15B9\u15BA ";
-			Pantalla.Texto(vidasString, 3, Console.BufferHeight - 1, ConsoleColor.Green);
+			Pantalla.Texto(vidasString, 3, Pantalla.SizeY - 1, ConsoleColor.Green);
 		}
 	}
 }

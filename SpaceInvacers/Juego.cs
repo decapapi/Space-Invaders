@@ -8,23 +8,20 @@ namespace SpaceInvacers
 {
 	class Juego
 	{
-		private int sizeX;
-		private int sizeY;
-
 		public Juego() : this(60, 26) { }
 
 		public Juego(int sizeX, int sizeY) 
 		{
-			this.sizeX = sizeX;
-			this.sizeY = sizeY;
+			Pantalla.SizeX = sizeX;
+			Pantalla.SizeY = sizeY;
 		}
 
 		public void Lanzar()
 		{
 			Console.OutputEncoding = System.Text.Encoding.Unicode;
 			Console.CursorVisible = false;
-			Console.SetWindowSize(this.sizeX, this.sizeY);
-			Console.SetBufferSize(this.sizeX, this.sizeY);
+			Console.SetWindowSize(Pantalla.SizeX, Pantalla.SizeY);
+			Console.SetBufferSize(Pantalla.SizeX, Pantalla.SizeY);
 			Console.Title = "Space Invaders";
 
 			Pantalla.DibujarMarco();

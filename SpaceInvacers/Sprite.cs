@@ -64,17 +64,17 @@ namespace SpaceInvacers
 
 		public bool EstaEntreLimites(int x, int y)
 		{
-			return x >= 1 && x + this.Imagen.Length <= Console.BufferWidth && y >= 0 && y <= Console.BufferHeight;
+			return x >= 1 && x + this.Imagen.Length <= Pantalla.SizeX && y >= 0 && y <= Pantalla.SizeY;
 		}
 
 		public bool EstaEntreLimitesX(int x)
 		{
-			return x >= 1 && x + this.Imagen.Length <= Console.BufferWidth - 1;
+			return x >= 1 && x + this.Imagen.Length <= Pantalla.SizeX - 1;
 		}
 
 		public bool EstaEntreLimitesY(int y)
 		{
-			return y >= 1 && y <= Console.BufferHeight - 1;
+			return y >= 1 && y <= Pantalla.SizeY - 1;
 		}
 
 		public int GetX()

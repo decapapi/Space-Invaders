@@ -31,10 +31,10 @@ namespace SpaceInvacers
             if (this.direccion == 0) { // No se está moviendo
                 int dir = random.Next(1, 100) <= 50 ? -1 : 1;
 				this.direccion = dir;
-                this.x = dir > 0 ? 1 : Console.BufferWidth - this.Imagen.Length - 3; 
+                this.x = dir > 0 ? 1 : Pantalla.SizeX - this.Imagen.Length - 3; 
 			}
 
-            if (this.direccion > 0 && this.x == Console.BufferWidth - this.Imagen.Length - 1
+            if (this.direccion > 0 && this.x == Pantalla.SizeX - this.Imagen.Length - 1
 				 || this.direccion < 0 && this.x == 1) {
                 this.Destruir();
                 return;

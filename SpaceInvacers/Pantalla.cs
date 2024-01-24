@@ -9,7 +9,7 @@ namespace SpaceInvacers
 {
 	class Pantalla
 	{
-		struct Caracter {
+		private struct Caracter {
 			public char imagen;
 			public bool haCambiado;
 		}
@@ -18,9 +18,12 @@ namespace SpaceInvacers
 
 		private static char[] estrellitas = { '\u2605', '\u2734' };
 
+		public static int SizeX { get; set; }
+		public static int SizeY { get; set; }
+
 		public static void TextoCentrado(string texto, int y, ConsoleColor color = ConsoleColor.White)
 		{
-			int consoleWidth = Console.BufferWidth;
+			int consoleWidth = SizeX;
 			int textLength = texto.Length;
 
 			int x = (consoleWidth - textLength) / 2;
@@ -32,7 +35,7 @@ namespace SpaceInvacers
 
 		public static void Texto(string texto, int x, int y, ConsoleColor color = ConsoleColor.White)
 		{
-			if (x >= 0 && x < Console.WindowWidth && y >= 0 && y < Console.WindowHeight) {
+			if (x >= 0 && x < SizeX && y >= 0 && y < SizeY) {
 				Console.SetCursorPosition(x, y);
 				Console.ForegroundColor = color;
 				Console.Write(texto);
@@ -42,7 +45,7 @@ namespace SpaceInvacers
 
 		public static void CrearFondo()
 		{
-			fondo = new Caracter[Console.BufferHeight - 2, Console.BufferWidth - 2];
+			fondo = new Caracter[SizeY - 2, SizeX - 2];
 
 			Random random = new Random();
 
@@ -94,8 +97,8 @@ namespace SpaceInvacers
 
 		public static void DibujarMarco()
 		{
-			int ancho = Console.BufferWidth;
-			int alto = Console.BufferHeight - 1;
+			int ancho = SizeX;
+			int alto = SizeY - 1;
 			Console.SetCursorPosition(0, 0);
 			Console.Write("\u250F"); // Esquina superior izquierda
 
@@ -121,12 +124,12 @@ namespace SpaceInvacers
 
 		public static void Limpiar()
 		{
-			for (int i = 1; i < Console.BufferHeight - 2; i++) {
+			for (int i = 1; i < SizeY - 2; i++) {
 				Console.SetCursorPosition(1, i);
-				Console.Write(new string(' ', Console.BufferWidth - 2));
+				Console.Write(new string(' ', SizeX - 2));
 			}
-			Console.SetCursorPosition(0, Console.BufferHeight - 1);
-			Console.Write(new string(' ', Console.BufferWidth - 3));
+			Console.SetCursorPosition(0, SizeY - 1);
+			Console.Write(new string(' ', SizeX - 3));
 		}
 	}
 }

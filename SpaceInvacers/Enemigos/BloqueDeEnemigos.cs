@@ -33,7 +33,7 @@ namespace SpaceInvacers
 				Enemigo ultimoEnemigo = this.enemigos[i, this.enemigos.GetLength(1) - 1];
 				Enemigo primerEnemigo = this.enemigos[i, 0];
 
-				if (ultimoEnemigo.GetX() >= (Console.BufferWidth - ultimoEnemigo.Imagen.Length) - 1) {
+				if (ultimoEnemigo.GetX() >= (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1) {
 					puedeMoverDerecha = false;
 					this.bajar = !this.bajar;
 				}
