@@ -129,7 +129,7 @@ namespace SpaceInvacers
 				Console.Write(new string(' ', SizeX - 2));
 			}
 			Console.SetCursorPosition(0, SizeY - 1);
-			Console.Write(new string(' ', SizeX - 3));
+			Console.Write(new string(' ', SizeX));
 		}
 	}
 }

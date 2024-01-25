@@ -25,6 +25,7 @@ namespace SpaceInvacers
 		{
 			MostrarPuntuacion();
 			MostrarVidas();
+			Pantalla.Texto("Pausa: F10", Pantalla.SizeX - 12, Pantalla.SizeY - 1);
 		}
 
 		public void ActualizarPuntuacion(int puntos)
@@ -62,12 +63,12 @@ namespace SpaceInvacers
 
 		private void MostrarVidas()
 		{
-			Pantalla.Texto(this.vidas.ToString(), 1, Pantalla.SizeY - 1);
-			Pantalla.Texto(new String(' ', 9), 2, Pantalla.SizeY - 1);
+			Pantalla.Texto(this.vidas.ToString(), 2, Pantalla.SizeY - 1);
+			Pantalla.Texto(new String(' ', 9), 3, Pantalla.SizeY - 1);
 			string vidasString = "";
 			for (int i = 1; i < this.vidas; i++)
 				vidasString += "\u15B9\u15BA ";
-			Pantalla.Texto(vidasString, 3, Pantalla.SizeY - 1, ConsoleColor.Green);
+			Pantalla.Texto(vidasString, 4, Pantalla.SizeY - 1, ConsoleColor.Green);
 		}
 	}
 }

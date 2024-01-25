@@ -36,7 +36,7 @@ namespace SpaceInvacers
 
 		public void Mover(bool positivo)
 		{
-			if (!positivo && this.y == 3 || positivo && y == Pantalla.SizeY - 2) {
+			if (!positivo && this.y == 3 || positivo && y == Pantalla.SizeY - 3) {
 				this.Destruir();
 				return;
 			}

@@ -8,6 +8,8 @@ namespace SpaceInvacers
 {
     class Partida
 	{
+		private bool pausa = false;
+
 		public void Lanzar()
 		{
 			Marcador marcador = new Marcador();
@@ -36,6 +38,29 @@ namespace SpaceInvacers
 			do {
 				tecla = ConsoleKey.None;
 
+				if (Console.KeyAvailable)
+					tecla = Console.ReadKey(true).Key;
+
+				if (tecla == ConsoleKey.F10) {
+					this.pausa = !this.pausa;
+					Pantalla.Limpiar();
+					if (this.pausa) MostrarPausa();
+					else marcador.Actuallizar();
+				}
+
+				if (this.pausa)
+					continue;
+
+				switch (tecla)
+				{
+					case ConsoleKey.LeftArrow: nave.MoverIzquierda(); break;
+					case ConsoleKey.RightArrow: nave.MoverDerecha(); break;
+					case ConsoleKey.Spacebar:
+						if (!proyectil.Activo)
+							proyectil.Disparar(nave.GetX(), nave.GetY());
+						break;
+				}
+
 				foreach (Timer timer in timers)
 					timer.Actualizar();
 
@@ -51,18 +76,6 @@ namespace SpaceInvacers
 
 				if (ovni.GetActivo())
 					ovni.Dibujar();
-
-				if (Console.KeyAvailable)
-					tecla = Console.ReadKey(true).Key;
-
-				switch (tecla) {
-					case ConsoleKey.LeftArrow: nave.MoverIzquierda(); break;
-					case ConsoleKey.Spacebar:
-						if (!proyectil.Activo)
-							proyectil.Disparar(nave.GetX(), nave.GetY());
-						break;
-					case ConsoleKey.RightArrow: nave.MoverDerecha(); break;
-				}
 
 				if (timerBloque.GetTicked())
 					bloqueDeEnemigos.Mover();
@@ -114,10 +127,14 @@ namespace SpaceInvacers
 			juego.Lanzar();
 		}
 
+		private void MostrarPausa()
+		{
+			Pantalla.TextoCentrado("J U E G O   P A U S A D O", 10);
+			Pantalla.TextoCentrado("Pulsa F10 para reanudar", 12);
+		}
+
 		private void MostrarGameOver()
 		{
-			Pantalla.DibujarMarco();
-
 			Timer timer = new Timer(1000);
 
 			ConsoleKey tecla = ConsoleKey.None;
@@ -128,8 +145,8 @@ namespace SpaceInvacers
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
 					Pantalla.DibujarFondo();
-					Pantalla.TextoCentrado("G A M E   O V E R", 8, ConsoleColor.Red);
-					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 10);
+					Pantalla.TextoCentrado("G A M E   O V E R", 10, ConsoleColor.Red);
+					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 12);
 				}
 
 				timer.Actualizar();
