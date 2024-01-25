@@ -43,7 +43,6 @@ namespace SpaceInvacers
 		{
 			if (this.vidas > 0)
 				this.vidas--;
-
 			this.Actuallizar();
 		}
 

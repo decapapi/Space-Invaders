@@ -22,15 +22,13 @@ namespace SpaceInvacers
 		{
 			if (valores.ContainsKey(clave))
 				return valores[clave];
-
 			return "";
 		}
 
 		public static int GetInt32(string clave)
 		{
-			if (valores.ContainsKey(clave))
-				if (int.TryParse(valores[clave], out int valor))
-					return valor;
+			if (int.TryParse(GetString(clave), out int valor))
+				return valor;
 			return -1;
 		}
 

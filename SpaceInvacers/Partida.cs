@@ -8,11 +8,22 @@ namespace SpaceInvacers
 {
     class Partida
 	{
-		private bool pausa = false;
+		private bool pausa;
+		private bool nivelGanado;
+		private static Marcador marcador;
+
+		public Partida() : this(true) { }
+
+		public Partida(bool nuevaPartida)
+		{
+			this.pausa = false;
+			this.nivelGanado = false;
+			if (nuevaPartida) marcador = new Marcador();
+			else marcador.Actuallizar();
+		}
 
 		public void Lanzar()
 		{
-			Marcador marcador = new Marcador();
 			BloqueDeEnemigos bloqueDeEnemigos = new BloqueDeEnemigos();
 			BloqueDeTorres bloqueDeTorres = new BloqueDeTorres();
 			Ovni ovni = new Ovni();
@@ -60,6 +71,9 @@ namespace SpaceInvacers
 							proyectil.Disparar(nave.GetX(), nave.GetY());
 						break;
 				}
+
+				if (bloqueDeEnemigos.GetEnemigosRestantes() <= 0)
+					this.nivelGanado = true;
 
 				foreach (Timer timer in timers)
 					timer.Actualizar();
@@ -116,15 +130,18 @@ namespace SpaceInvacers
 
 				}
 
-			} while (tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
+			} while (!this.nivelGanado && tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
 
 			Pantalla.Limpiar();
 
-			if (tecla != ConsoleKey.Escape)
-				MostrarGameOver();
+			if (nivelGanado) {
+				Partida partida = new Partida(false);
+				partida.Lanzar();
+				return;
+			}
 
-			Juego juego = new Juego();
-			juego.Lanzar();
+			if (marcador.GetVidas() <= 0)
+				MostrarGameOver();
 		}
 
 		private void MostrarPausa()
