@@ -12,11 +12,15 @@ namespace SpaceInvacers
 		private Enemigo[,] enemigos = new Enemigo[3, 10];
 		private bool moviendoIzquierda = false;
 		private bool bajar = false;
+		private int enemigosRestantes;
+
 		public Proyectil Proyectil { get; }
 
 		public BloqueDeEnemigos()
 		{
-			for (int i = 0; i < 10; i++) {
+			this.enemigosRestantes = enemigos.GetLength(0) * enemigos.GetLength(1);
+
+			for (int i = 0; i < enemigos.GetLength(1); i++) {
 				int x = 15 + i * 3;
 				this.enemigos[0, i] = new Calamar(x, 6);
 				this.enemigos[1, i] = new Cangrejo(x, 7);
@@ -29,21 +33,46 @@ namespace SpaceInvacers
 		{
 			bool puedeMoverDerecha = !this.moviendoIzquierda;
 			bool puedeMoverIzquierda = true;
+
+			if (this.enemigosRestantes <= 0)
+				return;
+
+			Enemigo primerEnemigo = null;
+			Enemigo ultimoEnemigo = null;
+
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
-				Enemigo ultimoEnemigo = this.enemigos[i, this.enemigos.GetLength(1) - 1];
-				Enemigo primerEnemigo = this.enemigos[i, 0];
-
-				if (ultimoEnemigo.GetX() >= (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1) {
-					puedeMoverDerecha = false;
-					this.bajar = !this.bajar;
+				for (int j = 0; j < this.enemigos.GetLength(1); j++) {
+					if (this.enemigos[i, j].Activo) {
+						primerEnemigo = this.enemigos[i, j];
+						ultimoEnemigo = this.enemigos[i, j];
+						break;
+					}
 				}
+				if (primerEnemigo != null)
+					break;
+			}
 
-				if (primerEnemigo.GetX() == 1) {
-					this.moviendoIzquierda = false;
-					puedeMoverIzquierda = false;
-					puedeMoverDerecha = true;
-					this.bajar = !this.bajar;
+			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
+				for (int j = 0; j < this.enemigos.GetLength(1); j++) {
+					if (this.enemigos[i, j].Activo) {
+						if (this.enemigos[i, j].GetX() < primerEnemigo.GetX())
+							primerEnemigo = this.enemigos[i, j];
+						if (this.enemigos[i, j].GetX() > ultimoEnemigo.GetX())
+							ultimoEnemigo = this.enemigos[i, j];
+					}
 				}
+			}
+
+			if (ultimoEnemigo.GetX() >= (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1) {
+				puedeMoverDerecha = false;
+				this.bajar = !this.bajar;
+			}
+
+			if (primerEnemigo.GetX() == 1) {
+				this.moviendoIzquierda = false;
+				puedeMoverIzquierda = false;
+				puedeMoverDerecha = true;
+				this.bajar = !this.bajar;
 			}
 
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
@@ -75,8 +104,8 @@ namespace SpaceInvacers
 
 			int fila, columna;
 			do {
-				fila = random.Next(0, 3);
-				columna = random.Next(0, 10);
+				fila = random.Next(0, enemigos.GetLength(0));
+				columna = random.Next(0, enemigos.GetLength(1));
 			} while (!this.enemigos[fila, columna].Activo);
 
 			Enemigo enemigo = this.enemigos[fila, columna];
@@ -92,6 +121,7 @@ namespace SpaceInvacers
 					if (this.enemigos[i, j].Activo)
 						if (proyectil.Colisiona(this.enemigos[i, j])) {
 							this.enemigos[i, j].Destruir();
+							this.enemigosRestantes--;
 							proyectil.Destruir();
 							return true;
 						}
@@ -133,6 +163,11 @@ namespace SpaceInvacers
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
 					if (this.enemigos[i, j].Activo)
 						this.enemigos[i, j].Dibujar();
+		}
+
+		public int GetEnemigosRestantes()
+		{
+			return this.enemigosRestantes;
 		}
 	}
 }
