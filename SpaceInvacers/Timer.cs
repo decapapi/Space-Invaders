@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceInvacers
 {
-	internal class Timer
+	class Timer
 	{
 		private long ultimoTick;
 		private long tickTime;

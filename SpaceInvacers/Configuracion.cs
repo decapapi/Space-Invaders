@@ -14,15 +14,8 @@ namespace SpaceInvacers
 
 		static Configuracion()
 		{
-			Inicializar();
-		}
-
-		public static void Inicializar()
-		{
-			if (!File.Exists(ruta))
-				File.Create(ruta);
-
-			valores = LeerArchivo(ruta);
+			if (File.Exists(ruta)) valores = LeerArchivo(ruta);
+			else File.Create(ruta);
 		}
 
 		public static string GetString(string clave)
@@ -44,6 +37,7 @@ namespace SpaceInvacers
 		public static void Guardar(string clave, string valor)
 		{
 			valores[clave] = valor;
+			if (!File.Exists(ruta)) return;
 			using (StreamWriter writer = new StreamWriter(ruta))
 				foreach (var entry in valores)
 					writer.WriteLine($"{entry.Key}: {entry.Value}");
@@ -51,16 +45,14 @@ namespace SpaceInvacers
 
 		public static void Guardar(string clave, int valor)
 		{
-			valores[clave] = valor.ToString();
-			using (StreamWriter writer = new StreamWriter(ruta))
-				foreach (var entry in valores)
-					writer.WriteLine($"{entry.Key}: {entry.Value}");
+			Guardar(clave, valor.ToString());
 		}
 
 		static Dictionary<string, string> LeerArchivo(string ruta)
 		{
 			Dictionary<string, string> valores = new Dictionary<string, string>();
 
+			if (!File.Exists(ruta)) return valores;
 			using (StreamReader reader = new StreamReader(ruta))
 				while (!reader.EndOfStream) {
 					string linea = reader.ReadLine();
