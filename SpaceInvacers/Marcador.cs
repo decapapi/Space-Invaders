@@ -25,7 +25,8 @@ namespace SpaceInvacers
 		{
 			MostrarPuntuacion();
 			MostrarVidas();
-			Pantalla.Texto("Pausa: F10", Pantalla.SizeX - 12, Pantalla.SizeY - 1);
+			Pantalla.Texto("Volver: ESC", Pantalla.SizeX - 13, Pantalla.SizeY - 1);
+			Pantalla.TextoCentrado("Pausa: F10", Pantalla.SizeY - 1);
 		}
 
 		public void ActualizarPuntuacion(int puntos)

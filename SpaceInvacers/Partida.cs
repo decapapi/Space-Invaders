@@ -131,6 +131,7 @@ namespace SpaceInvacers
 		{
 			Pantalla.TextoCentrado("J U E G O   P A U S A D O", 10);
 			Pantalla.TextoCentrado("Pulsa F10 para reanudar", 12);
+			Pantalla.TextoCentrado("Pulsa ESC para volver al menu", 14);
 		}
 
 		private void MostrarGameOver()
