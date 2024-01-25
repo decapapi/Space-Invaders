@@ -16,6 +16,8 @@ namespace SpaceInvacers
 		{
 			this.puntuacion = 0;
 			this.vidas = 3;
+			int highScore = Configuracion.GetInt32("highscore");
+			this.highScore = highScore > -1 ? highScore : 0;
 			this.Actuallizar();
 		}
 
@@ -28,6 +30,10 @@ namespace SpaceInvacers
 		public void ActualizarPuntuacion(int puntos)
 		{
 			this.puntuacion += puntos;
+			if (this.puntuacion > this.highScore) {
+				Configuracion.Guardar("highscore", this.puntuacion);
+				this.highScore = this.puntuacion;
+			}
 			this.Actuallizar();
 		}
 

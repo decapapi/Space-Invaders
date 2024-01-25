@@ -10,9 +10,9 @@ namespace SpaceInvacers
     class BloqueDeEnemigos
 	{
 		private Enemigo[,] enemigos = new Enemigo[3, 10];
-		public Proyectil Proyectil { get; }
 		private bool moviendoIzquierda = false;
 		private bool bajar = false;
+		public Proyectil Proyectil { get; }
 
 		public BloqueDeEnemigos()
 		{
