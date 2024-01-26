@@ -9,13 +9,13 @@ namespace SpaceInvacers
 {
 	class Configuracion
 	{
-		private static string ruta { get; set; } = "juego.cfg";
+		private static string Ruta { get; set; } = "juego.cfg";
 		private static Dictionary<string, string> valores { get; set; } = new Dictionary<string, string>();
 
 		static Configuracion()
 		{
-			if (File.Exists(ruta)) valores = LeerArchivo(ruta);
-			else File.Create(ruta);
+			if (File.Exists(Ruta)) valores = LeerArchivo(Ruta);
+			else File.Create(Ruta);
 		}
 
 		public static string GetString(string clave)
@@ -35,8 +35,8 @@ namespace SpaceInvacers
 		public static void Guardar(string clave, string valor)
 		{
 			valores[clave] = valor;
-			if (!File.Exists(ruta)) return;
-			using (StreamWriter writer = new StreamWriter(ruta))
+			if (!SePuedeAbrirArchivo(Ruta)) return;
+			using (StreamWriter writer = new StreamWriter(Ruta))
 				foreach (var entry in valores)
 					writer.WriteLine($"{entry.Key}: {entry.Value}");
 		}
@@ -50,7 +50,7 @@ namespace SpaceInvacers
 		{
 			Dictionary<string, string> valores = new Dictionary<string, string>();
 
-			if (!File.Exists(ruta)) return valores;
+			if (!SePuedeAbrirArchivo(ruta)) return valores;
 			using (StreamReader reader = new StreamReader(ruta))
 				while (!reader.EndOfStream) {
 					string linea = reader.ReadLine();
@@ -64,6 +64,31 @@ namespace SpaceInvacers
 				}
 
 			return valores;
+		}
+
+		public static bool SePuedeAbrirArchivo()
+		{
+			return SePuedeAbrirArchivo(Ruta);
+		}
+
+		public static bool SePuedeAbrirArchivo(string ruta)
+		{
+			if (!File.Exists(ruta)) 
+				return false;
+
+			FileStream stream = null;
+
+			try {
+				stream = File.Open(ruta, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+			} catch (IOException) {
+				return false;
+			}
+			finally {
+				if (stream != null)
+					stream.Close();
+			}
+
+			return true;
 		}
 	}
 }
