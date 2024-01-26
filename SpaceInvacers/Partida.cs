@@ -10,12 +10,14 @@ namespace SpaceInvacers
 	{
 		private bool pausa;
 		private bool nivelGanado;
+		private int nivel;
 		private static Marcador marcador;
 
-		public Partida() : this(true) { }
+		public Partida() : this(true, 1) { }
 
-		public Partida(bool nuevaPartida)
+		public Partida(bool nuevaPartida, int nivel)
 		{
+			this.nivel = nivel;
 			this.pausa = false;
 			this.nivelGanado = false;
 			if (nuevaPartida) marcador = new Marcador();
@@ -33,9 +35,9 @@ namespace SpaceInvacers
 
 			List<Timer> timers = new List<Timer>();
 
-			Timer timerBloque = new Timer(800);
-			Timer timerMoverOvni = new Timer(150);
-			Timer timerDisparoEnemigo = new Timer(1500);
+			Timer timerBloque = new Timer(800 / this.nivel);
+			Timer timerMoverOvni = new Timer(150 / this.nivel);
+			Timer timerDisparoEnemigo = new Timer(1500 / this.nivel);
 			Timer timerActualizarDisparoEnemigo = new Timer(40);
 
 			timers.Add(timerBloque);
@@ -133,12 +135,12 @@ namespace SpaceInvacers
 			Pantalla.Limpiar();
 
 			if (nivelGanado) {
-				Partida partida = new Partida(false);
+				Partida partida = new Partida(false, this.nivel + 1);
 				partida.Lanzar();
 				return;
 			}
 
-			if (marcador.GetVidas() <= 0)
+			if (marcador.GetVidas() <= 0 || !nivelGanado)
 				MostrarGameOver();
 
 			if (tecla == ConsoleKey.Escape) {

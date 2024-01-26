@@ -9,7 +9,7 @@ namespace SpaceInvacers
 {
     class BloqueDeEnemigos
 	{
-		private Enemigo[,] enemigos = new Enemigo[3, 10];
+		private Enemigo[,] enemigos = new Enemigo[3, Pantalla.SizeX / 6];
 		private bool moviendoIzquierda = false;
 		private bool bajar = false;
 		private int enemigosRestantes;
@@ -21,8 +21,10 @@ namespace SpaceInvacers
 		{
 			this.enemigosRestantes = enemigos.GetLength(0) * enemigos.GetLength(1);
 
+			int inicioX = (Pantalla.SizeX - (enemigos.GetLength(1) * 3)) / 2;
+
 			for (int i = 0; i < enemigos.GetLength(1); i++) {
-				int x = 15 + i * 3;
+				int x = inicioX + i * 3;
 				this.enemigos[0, i] = new Calamar(x, 6);
 				this.enemigos[1, i] = new Cangrejo(x, 7);
 				this.enemigos[2, i] = new Pulpo(x, 8);
