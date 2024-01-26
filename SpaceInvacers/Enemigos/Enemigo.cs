@@ -12,20 +12,20 @@ namespace SpaceInvacers
 
 		public Enemigo(int x, int y, string imagen, ConsoleColor color) : base(x, y, imagen, color) { }
 
-		public void MoverDerecha() { base.Mover(x+1, y); }
-		public void MoverIzquierda() { base.Mover(x-1, y); }
-		public void Subir() { base.Mover(x, y-1); }
-		public void Bajar() { base.Mover(x, y+1); }
+		public void MoverDerecha() { base.Mover(x + 1, y); }
+		public void MoverIzquierda() { base.Mover(x - 1, y); }
+		public void Subir() { base.Mover(x, y - 1); }
+		public void Bajar() { base.Mover(x, y + 1); }
 
-		public bool Activo 
-		{ 
-			get { return this.activo; } 
+		public bool Activo
+		{
+			get { return this.activo; }
 			set { this.activo = value; }
 		}
 
 		public virtual void Destruir()
-		{ 
-			this.activo = false; 
+		{
+			this.activo = false;
 			this.Borrar();
 		}
 	}

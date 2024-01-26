@@ -13,7 +13,6 @@ namespace SpaceInvacers
 		public void Lanzar()
 		{
 			Pantalla.CrearFondo();
-			Pantalla.DibujarFondo();
 
 			Timer timer = new Timer(1000);
 
@@ -24,7 +23,6 @@ namespace SpaceInvacers
 
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
-					Pantalla.DibujarFondo();
 					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 10);
 					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", 12);
 				}

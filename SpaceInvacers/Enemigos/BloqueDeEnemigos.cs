@@ -13,6 +13,7 @@ namespace SpaceInvacers
 		private bool moviendoIzquierda = false;
 		private bool bajar = false;
 		private int enemigosRestantes;
+		private Random random = new Random();
 
 		public Proyectil Proyectil { get; }
 
@@ -31,9 +32,6 @@ namespace SpaceInvacers
 
 		public void Mover()
 		{
-			bool puedeMoverDerecha = !this.moviendoIzquierda;
-			bool puedeMoverIzquierda = true;
-
 			if (this.enemigosRestantes <= 0)
 				return;
 
@@ -63,16 +61,13 @@ namespace SpaceInvacers
 				}
 			}
 
-			if (ultimoEnemigo.GetX() >= (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1) {
-				puedeMoverDerecha = false;
-				this.bajar = !this.bajar;
-			}
+			bool puedeMoverDerecha = ultimoEnemigo.GetX() < (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1;
+			bool puedeMoverIzquierda = primerEnemigo.GetX() > 1;
 
-			if (primerEnemigo.GetX() == 1) {
-				this.moviendoIzquierda = false;
-				puedeMoverIzquierda = false;
-				puedeMoverDerecha = true;
+			if (!puedeMoverDerecha || !puedeMoverIzquierda)
+			{
 				this.bajar = !this.bajar;
+				this.moviendoIzquierda = !puedeMoverDerecha;
 			}
 
 			for (int i = 0; i < this.enemigos.GetLength(0); i++) {
@@ -81,13 +76,10 @@ namespace SpaceInvacers
 						this.enemigos[i, j].Bajar();
 						continue;
 					}
-					if (puedeMoverDerecha && !this.moviendoIzquierda)
-						this.enemigos[i, j].MoverDerecha();
-					else if (puedeMoverIzquierda) {
-						this.moviendoIzquierda = true;
+					if (this.moviendoIzquierda)
 						this.enemigos[i, j].MoverIzquierda();
-					}
-
+					else
+						this.enemigos[i, j].MoverDerecha();
 				}
 			}
 		}
@@ -100,8 +92,6 @@ namespace SpaceInvacers
 
 		public void Disparar()
 		{
-			Random random = new Random();
-
 			int fila, columna;
 			do {
 				fila = random.Next(0, enemigos.GetLength(0));

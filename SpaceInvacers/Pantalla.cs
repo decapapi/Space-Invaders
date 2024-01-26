@@ -80,6 +80,7 @@ namespace SpaceInvacers
 						fondo[i, j].haCambiado = imagenAntigua != fondo[i, j].imagen;
 					}
 				}
+			DibujarFondo();
 		}
 
 		public static void DibujarFondo()

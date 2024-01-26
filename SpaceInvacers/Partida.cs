@@ -62,8 +62,7 @@ namespace SpaceInvacers
 				if (this.pausa)
 					continue;
 
-				switch (tecla)
-				{
+				switch (tecla) {
 					case ConsoleKey.LeftArrow: nave.MoverIzquierda(); break;
 					case ConsoleKey.RightArrow: nave.MoverDerecha(); break;
 					case ConsoleKey.Spacebar:
@@ -127,7 +126,6 @@ namespace SpaceInvacers
 						proyectil.Destruir();
 						marcador.ActualizarPuntuacion(50);
 					}
-
 				}
 
 			} while (!this.nivelGanado && tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
@@ -142,6 +140,11 @@ namespace SpaceInvacers
 
 			if (marcador.GetVidas() <= 0)
 				MostrarGameOver();
+
+			if (tecla == ConsoleKey.Escape) {
+				Juego juego = new Juego();
+				juego.Lanzar();
+			}
 		}
 
 		private void MostrarPausa()
@@ -162,7 +165,6 @@ namespace SpaceInvacers
 
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
-					Pantalla.DibujarFondo();
 					Pantalla.TextoCentrado("G A M E   O V E R", 10, ConsoleColor.Red);
 					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 12);
 				}
