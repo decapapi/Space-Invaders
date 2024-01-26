@@ -20,6 +20,7 @@ namespace SpaceInvacers
 			this.nivel = nivel;
 			this.pausa = false;
 			this.nivelGanado = false;
+			this.MostrarIntro();
 			if (nuevaPartida) marcador = new Marcador();
 			else marcador.Actuallizar();
 		}
@@ -146,13 +147,40 @@ namespace SpaceInvacers
 				return;
 			}
 
-			if (marcador.GetVidas() <= 0 || !nivelGanado)
+			if (marcador.GetVidas() <= 0)
 				MostrarGameOver();
 
 			if (tecla == ConsoleKey.Escape) {
 				Juego juego = new Juego();
 				juego.Lanzar();
 			}
+		}
+
+		private void MostrarIntro()
+		{
+			Timer timerFondo = new Timer(1000);
+
+			ConsoleKey tecla = ConsoleKey.None;
+			do
+			{
+				if (Console.KeyAvailable)
+					tecla = Console.ReadKey(true).Key;
+
+				if (timerFondo.GetTicked()) {
+					Pantalla.ActualizarFondo();
+					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 7);
+					Pantalla.TextoCentrado("* TABLA DE PUNTUACIÓN *", 10);
+					Pantalla.TextoCentrado("\u0F3A\u1d16\u0F3B = ? MISTERY  ", 11);
+					Pantalla.TextoCentrado("\u15A7\u15A8  = 30 POINTS", 12);
+					Pantalla.TextoCentrado("\u14FF\u1502  = 20 POINTS", 13);
+					Pantalla.TextoCentrado("\u1578\u157A  = 10 POINTS", 14);
+					Pantalla.TextoCentrado("Pulsa cualquier tecla para iniciar", 17);
+				}
+
+				timerFondo.Actualizar();
+			} while (tecla == ConsoleKey.None);
+
+			Pantalla.Limpiar();
 		}
 
 		private void MostrarPausa()
