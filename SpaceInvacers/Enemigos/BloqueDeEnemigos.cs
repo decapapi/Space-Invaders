@@ -106,12 +106,14 @@ namespace SpaceInvacers
 				this.Proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
 		}
 
-		public bool ColisionaCon(Proyectil proyectil)
+		public bool ColisionaCon(Proyectil proyectil, out Type tipo)
 		{
+			tipo = null;
 			for (int i = 0; i < this.enemigos.GetLength(0); i++)
 				for (int j = 0; j < this.enemigos.GetLength(1); j++)
 					if (this.enemigos[i, j].Activo)
 						if (proyectil.Colisiona(this.enemigos[i, j])) {
+							tipo = this.enemigos[i, j].GetType();
 							this.enemigos[i, j].Destruir();
 							this.enemigosRestantes--;
 							proyectil.Destruir();

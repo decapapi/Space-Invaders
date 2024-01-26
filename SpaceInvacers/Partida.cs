@@ -120,8 +120,14 @@ namespace SpaceInvacers
 					bloqueDeEnemigos.Proyectil.Destruir();
 
 				if (proyectil.Activo) {
-					if (bloqueDeEnemigos.ColisionaCon(proyectil))
-						marcador.ActualizarPuntuacion(10);
+					if (bloqueDeEnemigos.ColisionaCon(proyectil, out Type tipo)) {
+						if (tipo == typeof(Calamar))
+							marcador.ActualizarPuntuacion(30);
+						if (tipo == typeof(Cangrejo))
+							marcador.ActualizarPuntuacion(20);
+						if (tipo == typeof(Pulpo))
+							marcador.ActualizarPuntuacion(10);
+					}
 
 					if (ovni.GetActivo() && ovni.Colisiona(proyectil)) {
 						ovni.Destruir();
