@@ -9,6 +9,7 @@ namespace SpaceInvacers
     class Partida
 	{
 		private bool pausa;
+		private bool salir;
 		private bool nivelGanado;
 		private int nivel;
 		private static Marcador marcador;
@@ -19,6 +20,7 @@ namespace SpaceInvacers
 		{
 			this.nivel = nivel;
 			this.pausa = false;
+			this.salir = false;
 			this.nivelGanado = false;
 			this.MostrarIntro();
 			if (nuevaPartida) marcador = new Marcador();
@@ -71,6 +73,10 @@ namespace SpaceInvacers
 					case ConsoleKey.Spacebar:
 						if (!proyectil.Activo)
 							proyectil.Disparar(nave.GetX(), nave.GetY());
+						break;
+					case ConsoleKey.Escape:
+						this.salir = Pantalla.Confirmacion("¿Seguro que quieres salir?");
+						marcador.Actuallizar();
 						break;
 				}
 
@@ -137,7 +143,7 @@ namespace SpaceInvacers
 					}
 				}
 
-			} while (!this.nivelGanado && tecla != ConsoleKey.Escape && marcador.GetVidas() > 0);
+			} while (!this.nivelGanado && !this.salir && marcador.GetVidas() > 0);
 
 			Pantalla.Limpiar();
 
@@ -150,7 +156,7 @@ namespace SpaceInvacers
 			if (marcador.GetVidas() <= 0)
 				MostrarGameOver();
 
-			if (tecla == ConsoleKey.Escape) {
+			if (this.salir) {
 				Juego juego = new Juego();
 				juego.Lanzar();
 			}

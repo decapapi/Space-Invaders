@@ -132,5 +132,23 @@ namespace SpaceInvacers
 			Console.SetCursorPosition(0, SizeY - 1);
 			Console.Write(new string(' ', SizeX));
 		}
+
+		public static bool Confirmacion(string mensaje)
+		{
+			Pantalla.Limpiar();
+
+			Pantalla.TextoCentrado(mensaje, 10);
+			Pantalla.TextoCentrado("Pulsa Enter para confirmar o ESC para rechazar", 12);
+
+			ConsoleKey tecla = ConsoleKey.None;
+			do {
+				if (Console.KeyAvailable)
+					tecla = Console.ReadKey(true).Key;
+			} while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
+
+			Pantalla.Limpiar();
+
+			return tecla == ConsoleKey.Enter;
+		}
 	}
 }
