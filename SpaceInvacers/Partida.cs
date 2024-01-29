@@ -64,8 +64,13 @@ namespace SpaceInvacers
 					else marcador.Actuallizar();
 				}
 
-				if (this.pausa)
+				if (this.pausa) {
+					if (tecla == ConsoleKey.Escape)
+						this.salir = Pantalla.Confirmacion("¿Seguro que quieres salir?");
+					if (!this.salir)
+						MostrarPausa();
 					continue;
+				}
 
 				switch (tecla) {
 					case ConsoleKey.LeftArrow: nave.MoverIzquierda(); break;
