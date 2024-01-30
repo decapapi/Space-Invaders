@@ -8,7 +8,7 @@ namespace SpaceInvacers
 {
 	class Juego
 	{
-		public Juego() : this(Pantalla.SizeX) { }
+		public Juego() : this(Pantalla.SizeX > -1 ? Pantalla.SizeX : 60) { }
 
 		public Juego(int sizeX) : this(sizeX, (int)(sizeX / 2.3)) { }
 

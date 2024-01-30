@@ -179,13 +179,13 @@ namespace SpaceInvacers
 
 				if (timerFondo.GetTicked()) {
 					Pantalla.ActualizarFondo();
-					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 7);
-					Pantalla.TextoCentrado("* TABLA DE PUNTUACIÓN *", 10);
-					Pantalla.TextoCentrado("\u0F3A\u1d16\u0F3B = ? MISTERY  ", 11);
-					Pantalla.TextoCentrado("\u15A7\u15A8  = 30 POINTS", 12);
-					Pantalla.TextoCentrado("\u14FF\u1502  = 20 POINTS", 13);
-					Pantalla.TextoCentrado("\u1578\u157A  = 10 POINTS", 14);
-					Pantalla.TextoCentrado("Pulsa cualquier tecla para iniciar", 17);
+					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", Pantalla.PosTextoY(-3));
+					Pantalla.TextoCentrado("* TABLA DE PUNTUACIÓN *", Pantalla.PosTextoY());
+					Pantalla.TextoCentrado("\u0F3A\u1d16\u0F3B = ? MISTERY  ", Pantalla.PosTextoY(1));
+					Pantalla.TextoCentrado("\u15A7\u15A8  = 30 POINTS", Pantalla.PosTextoY(2));
+					Pantalla.TextoCentrado("\u14FF\u1502  = 20 POINTS", Pantalla.PosTextoY(3));
+					Pantalla.TextoCentrado("\u1578\u157A  = 10 POINTS", Pantalla.PosTextoY(4));
+					Pantalla.TextoCentrado("Pulsa cualquier tecla para iniciar", Pantalla.PosTextoY(7));
 				}
 
 				timerFondo.Actualizar();
@@ -196,9 +196,9 @@ namespace SpaceInvacers
 
 		private void MostrarPausa()
 		{
-			Pantalla.TextoCentrado("J U E G O   P A U S A D O", 10);
-			Pantalla.TextoCentrado("Pulsa F10 para reanudar", 12);
-			Pantalla.TextoCentrado("Pulsa ESC para volver al menu", 14);
+			Pantalla.TextoCentrado("J U E G O   P A U S A D O", Pantalla.PosTextoY());
+			Pantalla.TextoCentrado("Pulsa F10 para reanudar", Pantalla.PosTextoY(2));
+			Pantalla.TextoCentrado("Pulsa ESC para volver al menu", Pantalla.PosTextoY(4));
 		}
 
 		private void MostrarGameOver()
@@ -212,8 +212,8 @@ namespace SpaceInvacers
 
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
-					Pantalla.TextoCentrado("G A M E   O V E R", 10, ConsoleColor.Red);
-					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", 12);
+					Pantalla.TextoCentrado("G A M E   O V E R", Pantalla.PosTextoY(), ConsoleColor.Red);
+					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", Pantalla.PosTextoY(2));
 				}
 
 				timer.Actualizar();

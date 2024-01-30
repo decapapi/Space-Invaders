@@ -135,10 +135,10 @@ namespace SpaceInvacers
 
 		public static bool Confirmacion(string mensaje)
 		{
-			Pantalla.Limpiar();
+			Limpiar();
 
-			Pantalla.TextoCentrado(mensaje, 10);
-			Pantalla.TextoCentrado("Pulsa Enter para confirmar o ESC para rechazar", 12);
+			TextoCentrado(mensaje, PosTextoY());
+			TextoCentrado("Pulsa Enter para confirmar o ESC para rechazar", PosTextoY(1));
 
 			ConsoleKey tecla = ConsoleKey.None;
 			do {
@@ -146,9 +146,14 @@ namespace SpaceInvacers
 					tecla = Console.ReadKey(true).Key;
 			} while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
-			Pantalla.Limpiar();
+			Limpiar();
 
 			return tecla == ConsoleKey.Enter;
+		}
+
+		public static int PosTextoY(int numLinea = 0)
+		{
+			return (int)(SizeY / 2.6) + (1 * numLinea);
 		}
 	}
 }

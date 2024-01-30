@@ -23,8 +23,8 @@ namespace SpaceInvacers
 
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
-					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", 10);
-					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", 12);
+					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", Pantalla.PosTextoY());
+					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", Pantalla.PosTextoY(2));
 				}
 				timer.Actualizar();
 			} while (tecla == ConsoleKey.None || (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter));
