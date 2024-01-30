@@ -28,15 +28,14 @@ namespace SpaceInvacers
 			Console.SetBufferSize(Pantalla.SizeX, Pantalla.SizeY);
 			Console.Title = "Space Invaders";
 
+			Pantalla.Limpiar();
 			Pantalla.DibujarMarco();
 
 			Bienvenida bienvenida = new Bienvenida();
 			bienvenida.Lanzar();
 
-			if (!bienvenida.GetSalir()) {
-				Partida partida = new Partida();
-				partida.Lanzar();
-			}
+			if (!bienvenida.GetSalir())
+				new Partida().Lanzar();
 		}
 
 		static void Main()

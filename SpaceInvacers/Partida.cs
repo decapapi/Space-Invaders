@@ -153,18 +153,15 @@ namespace SpaceInvacers
 			Pantalla.Limpiar();
 
 			if (nivelGanado) {
-				Partida partida = new Partida(false, this.nivel + 1);
-				partida.Lanzar();
+				new Partida(false, this.nivel + 1).Lanzar();
 				return;
 			}
 
 			if (marcador.GetVidas() <= 0)
 				MostrarGameOver();
 
-			if (this.salir) {
-				Juego juego = new Juego();
-				juego.Lanzar();
-			}
+			if (this.salir)
+				new Juego().Lanzar();
 		}
 
 		private void MostrarIntro()
@@ -221,10 +218,8 @@ namespace SpaceInvacers
 
 			Pantalla.Limpiar();
 
-			if (tecla == ConsoleKey.Enter) {
-				Juego juego = new Juego();
-				juego.Lanzar();
-			}
+			if (tecla == ConsoleKey.Enter)
+				new Juego().Lanzar(); ;
 		}
 	}
 }

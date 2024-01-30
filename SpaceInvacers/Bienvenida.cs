@@ -21,10 +21,17 @@ namespace SpaceInvacers
 				if (Console.KeyAvailable)
 					tecla = Console.ReadKey(true).Key;
 
+				if (tecla == ConsoleKey.F10) {
+					Ajustes.Mostrar();
+					tecla = ConsoleKey.None;
+					Pantalla.Limpiar();
+				}
+
 				if (timer.GetTicked()) {
 					Pantalla.ActualizarFondo();
 					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", Pantalla.PosTextoY());
 					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", Pantalla.PosTextoY(2));
+					Pantalla.TextoCentrado("Pulsa F10 para ver los ajustes", Pantalla.PosTextoY(4));
 				}
 				timer.Actualizar();
 			} while (tecla == ConsoleKey.None || (tecla != ConsoleKey.Escape && tecla != ConsoleKey.Enter));

@@ -140,10 +140,9 @@ namespace SpaceInvacers
 			TextoCentrado(mensaje, PosTextoY());
 			TextoCentrado("Pulsa Enter para confirmar o ESC para rechazar", PosTextoY(1));
 
-			ConsoleKey tecla = ConsoleKey.None;
+			ConsoleKey tecla;
 			do {
-				if (Console.KeyAvailable)
-					tecla = Console.ReadKey(true).Key;
+				tecla = Console.ReadKey(true).Key;
 			} while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
 			Limpiar();
