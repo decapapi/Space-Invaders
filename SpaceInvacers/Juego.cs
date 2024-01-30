@@ -8,7 +8,7 @@ namespace SpaceInvacers
 {
 	class Juego
 	{
-		public Juego() : this(60) { }
+		public Juego() : this(Pantalla.SizeX) { }
 
 		public Juego(int sizeX) : this(sizeX, (int)(sizeX / 2.3)) { }
 
@@ -41,11 +41,11 @@ namespace SpaceInvacers
 
 		static void Main()
 		{
-			int sizeX = Configuracion.GetInt32("sizeX");
-			int sizeY = Configuracion.GetInt32("sizeY");
-			if (sizeX > -1)
-				if (sizeY > -1) new Juego(sizeX, sizeY).Lanzar();
-				else new Juego(sizeX).Lanzar();
+			Pantalla.SizeX = Configuracion.GetInt32("sizeX");
+			Pantalla.SizeY = Configuracion.GetInt32("sizeY");
+			if (Pantalla.SizeY > -1)
+				if (Pantalla.SizeY > -1) new Juego(Pantalla.SizeX, Pantalla.SizeY).Lanzar();
+				else new Juego(Pantalla.SizeX).Lanzar();
 			else
 				new Juego().Lanzar();
 		}
