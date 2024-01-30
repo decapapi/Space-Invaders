@@ -21,11 +21,12 @@ namespace SpaceInvacers
 			Pantalla.Limpiar();
 			ConsoleKey tecla;
 			do {
-				Pantalla.TextoCentrado("* TAMAÑO DE LA PANTALLA *", Pantalla.PosTextoY(-2));
-				Pantalla.TextoCentrado($"{(seleccion == 0 ? '\u23FA' : ' ')}  60x26 ", Pantalla.PosTextoY());
-				Pantalla.TextoCentrado($"{(seleccion == 1 ? '\u23FA' : ' ')}  80x30 ", Pantalla.PosTextoY(2));
-				Pantalla.TextoCentrado($"{(seleccion == 2 ? '\u23FA' : ' ')}  100x38", Pantalla.PosTextoY(4));
-				Pantalla.TextoCentrado("Pulsa ESC para volver", Pantalla.PosTextoY(6));
+				Pantalla.TextoCentrado("* TAMAÑO DE LA PANTALLA *", Pantalla.PosTextoY(-4));
+				Pantalla.TextoCentrado($"{(seleccion == 0 ? '\u25CF' : '\u25CB')} 60x26 ", Pantalla.PosTextoY(-2));
+				Pantalla.TextoCentrado($"{(seleccion == 1 ? '\u25CF' : '\u25CB')} 80x30 ", Pantalla.PosTextoY());
+				Pantalla.TextoCentrado($"{(seleccion == 2 ? '\u25CF' : '\u25CB')} 100x38", Pantalla.PosTextoY(2));
+				Pantalla.TextoCentrado("Pulsa Enter para confirmar", Pantalla.PosTextoY(6));
+				Pantalla.TextoCentrado("Pulsa ESC para volver", Pantalla.PosTextoY(8));
 
 				tecla = Console.ReadKey(true).Key;
 
