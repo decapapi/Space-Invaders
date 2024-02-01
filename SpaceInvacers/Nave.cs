@@ -10,7 +10,7 @@ namespace SpaceInvacers
 	{
 		public Nave(int x, int y) : base(x, y, "\u15B9\u15BA", ConsoleColor.Green) { }
 
-		public Nave() : this(Pantalla.SizeX / 2, Pantalla.SizeY-3) { }
+		public Nave() : this(Pantalla.Ancho / 2, Pantalla.Alto-3) { }
 
 		public void MoverDerecha()
 		{

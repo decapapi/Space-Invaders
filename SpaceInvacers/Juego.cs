@@ -8,24 +8,24 @@ namespace SpaceInvacers
 {
 	class Juego
 	{
-		public Juego() : this(Pantalla.SizeX > -1 ? Pantalla.SizeX : 60) { }
+		public Juego() : this(Pantalla.Ancho > -1 ? Pantalla.Ancho : 60) { }
 
-		public Juego(int sizeX) : this(sizeX, (int)(sizeX / 2.3)) { }
+		public Juego(int Ancho) : this(Ancho, (int)(Ancho / 2.3)) { }
 
-		public Juego(int sizeX, int sizeY) 
+		public Juego(int Ancho, int Alto) 
 		{
-			Pantalla.SizeX = sizeX;
-			Pantalla.SizeY = sizeY;
-			Configuracion.Guardar("sizeX", sizeX);
-			Configuracion.Guardar("sizeY", sizeY);
+			Pantalla.Ancho = Ancho;
+			Pantalla.Alto = Alto;
+			Configuracion.Guardar("Ancho", Ancho);
+			Configuracion.Guardar("Alto", Alto);
 		}
 
 		public void Lanzar()
 		{
 			Console.OutputEncoding = System.Text.Encoding.Unicode;
 			Console.CursorVisible = false;
-			Console.SetWindowSize(Pantalla.SizeX, Pantalla.SizeY);
-			Console.SetBufferSize(Pantalla.SizeX, Pantalla.SizeY);
+			Console.SetWindowSize(Pantalla.Ancho, Pantalla.Alto);
+			Console.SetBufferSize(Pantalla.Ancho, Pantalla.Alto);
 			Console.Title = "Space Invaders";
 
 			Pantalla.Limpiar();
@@ -40,11 +40,11 @@ namespace SpaceInvacers
 
 		static void Main()
 		{
-			Pantalla.SizeX = Configuracion.GetInt32("sizeX");
-			Pantalla.SizeY = Configuracion.GetInt32("sizeY");
-			if (Pantalla.SizeY > -1)
-				if (Pantalla.SizeY > -1) new Juego(Pantalla.SizeX, Pantalla.SizeY).Lanzar();
-				else new Juego(Pantalla.SizeX).Lanzar();
+			Pantalla.Ancho = Configuracion.GetInt32("Ancho");
+			Pantalla.Alto = Configuracion.GetInt32("Alto");
+			if (Pantalla.Alto > -1)
+				if (Pantalla.Alto > -1) new Juego(Pantalla.Ancho, Pantalla.Alto).Lanzar();
+				else new Juego(Pantalla.Ancho).Lanzar();
 			else
 				new Juego().Lanzar();
 		}

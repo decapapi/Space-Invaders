@@ -18,12 +18,12 @@ namespace SpaceInvacers
 
 		private static char[] estrellitas = { '\u2605', '\u2734' };
 
-		public static int SizeX { get; set; }
-		public static int SizeY { get; set; }
+		public static int Ancho { get; set; }
+		public static int Alto { get; set; }
 
 		public static void TextoCentrado(string texto, int y, ConsoleColor color = ConsoleColor.White)
 		{
-			int consoleWidth = SizeX;
+			int consoleWidth = Ancho;
 			int textLength = texto.Length;
 
 			int x = (consoleWidth - textLength) / 2;
@@ -35,7 +35,7 @@ namespace SpaceInvacers
 
 		public static void Texto(string texto, int x, int y, ConsoleColor color = ConsoleColor.White)
 		{
-			if (x >= 0 && x < SizeX && y >= 0 && y < SizeY) {
+			if (x >= 0 && x < Ancho && y >= 0 && y < Alto) {
 				Console.SetCursorPosition(x, y);
 				Console.ForegroundColor = color;
 				Console.Write(texto);
@@ -45,7 +45,7 @@ namespace SpaceInvacers
 
 		public static void CrearFondo()
 		{
-			fondo = new Caracter[SizeY - 2, SizeX - 2];
+			fondo = new Caracter[Alto - 2, Ancho - 2];
 
 			Random random = new Random();
 
@@ -98,8 +98,8 @@ namespace SpaceInvacers
 
 		public static void DibujarMarco()
 		{
-			int ancho = SizeX;
-			int alto = SizeY - 1;
+			int ancho = Ancho;
+			int alto = Alto - 1;
 			Console.SetCursorPosition(0, 0);
 			Console.Write("\u250F"); // Esquina superior izquierda
 
@@ -125,12 +125,12 @@ namespace SpaceInvacers
 
 		public static void Limpiar()
 		{
-			for (int i = 1; i < SizeY - 2; i++) {
+			for (int i = 1; i < Alto - 2; i++) {
 				Console.SetCursorPosition(1, i);
-				Console.Write(new string(' ', SizeX - 2));
+				Console.Write(new string(' ', Ancho - 2));
 			}
-			Console.SetCursorPosition(0, SizeY - 1);
-			Console.Write(new string(' ', SizeX));
+			Console.SetCursorPosition(0, Alto - 1);
+			Console.Write(new string(' ', Ancho));
 		}
 
 		public static bool Confirmacion(string mensaje)
@@ -152,7 +152,7 @@ namespace SpaceInvacers
 
 		public static int PosTextoY(int numLinea = 0)
 		{
-			return (int)(SizeY / 2.6) + (1 * numLinea);
+			return (int)(Alto / 2.6) + (1 * numLinea);
 		}
 	}
 }

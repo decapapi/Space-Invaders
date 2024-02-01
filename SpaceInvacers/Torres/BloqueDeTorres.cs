@@ -12,11 +12,11 @@ namespace SpaceInvacers
 
 		public BloqueDeTorres()
 		{
-			int espacioEntreTorres = Pantalla.SizeX / (this.torres.Length + 1);
+			int espacioEntreTorres = Pantalla.Ancho / (this.torres.Length + 1);
 			int inicioX = espacioEntreTorres;
 
 			for (int i = 0; i < this.torres.Length; i++) {
-				this.torres[i] = new Torre(inicioX, Pantalla.SizeY - 7);
+				this.torres[i] = new Torre(inicioX, Pantalla.Alto - 7);
 				inicioX += espacioEntreTorres;
 			}
 		}
@@ -43,7 +43,5 @@ namespace SpaceInvacers
 			}
 			return false;
 		}
-
-
 	}
 }

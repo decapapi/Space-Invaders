@@ -8,35 +8,26 @@ namespace SpaceInvacers
 {
 	class Proyectil : Sprite, IDestructible
 	{
-		private bool activo;
+		public bool Activo { get; set; } = false;
 
-		public Proyectil() : base(0, 0, "\u2579", ConsoleColor.White)
-		{
-			this.activo = false;
-		}
-
-		public bool Activo
-		{
-			get { return this.activo; }
-			set { this.activo = value; }
-		}
+		public Proyectil() : base(0, 0, "\u2579", ConsoleColor.White) { }
 
 		public void Destruir()
 		{
 			this.Borrar();
-			this.activo = false;
+			this.Activo = false;
 		}
 
 		public void Disparar(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
-			this.activo = true;
+			this.Activo = true;
 		}
 
 		public void Mover(bool positivo)
 		{
-			if (!positivo && this.y == 3 || positivo && y == Pantalla.SizeY - 3) {
+			if (!positivo && this.y == 3 || positivo && y == Pantalla.Alto - 3) {
 				this.Destruir();
 				return;
 			}

@@ -8,44 +8,37 @@ namespace SpaceInvacers
 {
 	class Timer
 	{
-		private Dictionary<string, long> ultimoTick = new Dictionary<string, long>();
-		private Dictionary<string, long> tickTime = new Dictionary<string, long>();
-		private Dictionary<string, bool> ticked = new Dictionary<string, bool>();
+		private Dictionary<string, TimerInfo> timers = new Dictionary<string, TimerInfo>();
 
 		public void Agregar(string nombre, int milisegundos)
 		{
-			tickTime[nombre] = milisegundos * TimeSpan.TicksPerMillisecond;
-			ultimoTick[nombre] = DateTime.Now.Ticks;
-			ticked[nombre] = true;
+			if (timers.ContainsKey(nombre)) 
+				return;
+
+			long tickTime = milisegundos * TimeSpan.TicksPerMillisecond;
+			this.timers[nombre] = new TimerInfo(tickTime, DateTime.Now.Ticks);
 		}
 
 		public void Actualizar()
 		{
 			DateTime tiempoActual = DateTime.Now;
 
-			foreach (string nombre in ultimoTick.Keys.ToList()) {
-				if (tiempoActual.Ticks - ultimoTick[nombre] < tickTime[nombre]) {
-					ticked[nombre] = false;
+			foreach (string nombre in timers.Keys.ToList()) {
+				if (tiempoActual.Ticks - timers[nombre].UltimoTick < timers[nombre].TickTime) {
+					this.timers[nombre].Ticked = false;
 					continue;
 				}
 
-				ticked[nombre] = true;
-				ultimoTick[nombre] = tiempoActual.Ticks;
+				this.timers[nombre].Ticked = true;
+				this.timers[nombre].UltimoTick = tiempoActual.Ticks;
 			}
-		}
-
-		public void SetTickTime(string nombre, int milisegundos)
-		{
-			if (!tickTime.ContainsKey(nombre)) 
-				return;
-			tickTime[nombre] = milisegundos * TimeSpan.TicksPerMillisecond;
 		}
 
 		public bool GetTicked(string nombre)
 		{
-			if (!ticked.ContainsKey(nombre)) 
+			if (!timers.ContainsKey(nombre)) 
 				return false;
-			return ticked[nombre];
+			return timers[nombre].Ticked;
 		}
 	}
 }

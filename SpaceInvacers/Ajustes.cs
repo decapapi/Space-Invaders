@@ -49,11 +49,11 @@ namespace SpaceInvacers
 			if (Pantalla.Confirmacion("¿Seguro que quieres aplicar los cambios?")
 				&& seleccion >= 0 && seleccion <= 2)
 			{
-				var (sizeX, sizeY) = screenSizes[seleccion];
-				Pantalla.SizeX = sizeX;
-				Pantalla.SizeY = sizeY;
-				Configuracion.Guardar("sizeX", Pantalla.SizeX);
-				Configuracion.Guardar("sizeY", Pantalla.SizeY);
+				var (Ancho, Alto) = screenSizes[seleccion];
+				Pantalla.Ancho = Ancho;
+				Pantalla.Alto = Alto;
+				Configuracion.Guardar("Ancho", Pantalla.Ancho);
+				Configuracion.Guardar("Alto", Pantalla.Alto);
 				new Juego().Lanzar();
 			}
 		}

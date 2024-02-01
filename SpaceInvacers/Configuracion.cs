@@ -82,8 +82,7 @@ namespace SpaceInvacers
 				stream = File.Open(ruta, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
 			} catch (IOException) {
 				return false;
-			}
-			finally {
+			} finally {
 				if (stream != null)
 					stream.Close();
 			}

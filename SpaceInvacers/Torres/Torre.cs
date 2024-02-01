@@ -8,7 +8,7 @@ namespace SpaceInvacers
 {
 	class Torre
 	{
-		private PiezaTorre[,] piezas = new PiezaTorre[2, Pantalla.SizeX / 6];
+		private PiezaTorre[,] piezas = new PiezaTorre[2, Pantalla.Ancho / 6];
 
 		public Torre(int x, int y)
 		{

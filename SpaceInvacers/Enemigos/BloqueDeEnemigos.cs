@@ -9,7 +9,7 @@ namespace SpaceInvacers
 {
     class BloqueDeEnemigos
 	{
-		private Enemigo[,] enemigos = new Enemigo[3, Pantalla.SizeX / 6];
+		private Enemigo[,] enemigos = new Enemigo[3, Pantalla.Ancho / 6];
 		private bool moviendoIzquierda = false;
 		private bool bajar = false;
 		private int enemigosRestantes;
@@ -21,7 +21,7 @@ namespace SpaceInvacers
 		{
 			this.enemigosRestantes = enemigos.GetLength(0) * enemigos.GetLength(1);
 
-			int inicioX = (Pantalla.SizeX - (enemigos.GetLength(1) * 3)) / 2;
+			int inicioX = (Pantalla.Ancho - (enemigos.GetLength(1) * 3)) / 2;
 
 			for (int i = 0; i < enemigos.GetLength(1); i++) {
 				int x = inicioX + i * 3;
@@ -63,7 +63,7 @@ namespace SpaceInvacers
 				}
 			}
 
-			bool puedeMoverDerecha = ultimoEnemigo.GetX() < (Pantalla.SizeX - ultimoEnemigo.Imagen.Length) - 1;
+			bool puedeMoverDerecha = ultimoEnemigo.GetX() < (Pantalla.Ancho - ultimoEnemigo.Imagen.Length) - 1;
 			bool puedeMoverIzquierda = primerEnemigo.GetX() > 1;
 
 			if (!puedeMoverDerecha || !puedeMoverIzquierda)
@@ -94,6 +94,9 @@ namespace SpaceInvacers
 
 		public void Disparar()
 		{
+			if (this.Proyectil.Activo)
+				return;
+
 			int fila, columna;
 			do {
 				fila = random.Next(0, enemigos.GetLength(0));
@@ -102,8 +105,7 @@ namespace SpaceInvacers
 
 			Enemigo enemigo = this.enemigos[fila, columna];
 
-			if (!this.Proyectil.Activo)
-				this.Proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
+			this.Proyectil.Disparar(enemigo.GetX(), enemigo.GetY());
 		}
 
 		public bool ColisionaCon(Proyectil proyectil, out Type tipo)

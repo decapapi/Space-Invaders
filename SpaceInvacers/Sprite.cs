@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SpaceInvacers
 {
@@ -42,7 +41,8 @@ namespace SpaceInvacers
 		public void Dibujar()
 		{
 			Console.ForegroundColor = this.Color;
-			Console.SetCursorPosition(this.x, this.y);
+			if (Console.GetCursorPosition().Left != this.x || Console.GetCursorPosition().Top != this.y)
+				Console.SetCursorPosition(this.x, this.y);
 			Console.Write(this.Imagen);
 			Console.ResetColor();
 		}
@@ -64,17 +64,17 @@ namespace SpaceInvacers
 
 		public bool EstaEntreLimites(int x, int y)
 		{
-			return x >= 1 && x + this.Imagen.Length <= Pantalla.SizeX && y >= 0 && y <= Pantalla.SizeY;
+			return x >= 1 && x + this.Imagen.Length <= Pantalla.Ancho && y >= 0 && y <= Pantalla.Alto;
 		}
 
 		public bool EstaEntreLimitesX(int x)
 		{
-			return x >= 1 && x + this.Imagen.Length <= Pantalla.SizeX - 1;
+			return x >= 1 && x + this.Imagen.Length <= Pantalla.Ancho - 1;
 		}
 
 		public bool EstaEntreLimitesY(int y)
 		{
-			return y >= 1 && y <= Pantalla.SizeY - 1;
+			return y >= 1 && y <= Pantalla.Alto - 1;
 		}
 
 		public int GetX()

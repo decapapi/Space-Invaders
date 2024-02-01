@@ -8,19 +8,13 @@ namespace SpaceInvacers
 {
 	class PiezaTorre : Sprite, IDestructible
 	{
-		private bool activo = true;
+		public bool Activo { get; set; } = true;
 
 		public PiezaTorre(int x, int y) : base(x, y, "\u2592", ConsoleColor.Green) { }
 
-		public bool Activo
-		{
-			get { return this.activo; }
-			set { this.activo = value; }
-		}
-
 		public void Destruir()
 		{
-			this.activo = false;
+			this.Activo = false;
 			this.Borrar();
 		}
 	}
