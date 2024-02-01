@@ -14,7 +14,8 @@ namespace SpaceInvacers
 		{
 			Pantalla.CrearFondo();
 
-			Timer timer = new Timer(1000);
+			Timer timer = new Timer();
+			timer.Agregar("fondo", 1000);
 
 			ConsoleKey tecla = ConsoleKey.None;
 			do {
@@ -27,7 +28,7 @@ namespace SpaceInvacers
 					Pantalla.Limpiar();
 				}
 
-				if (timer.GetTicked()) {
+				if (timer.GetTicked("fondo")) {
 					Pantalla.ActualizarFondo();
 					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", Pantalla.PosTextoY());
 					Pantalla.TextoCentrado("Pulsa Intro para jugar o ESC para salir", Pantalla.PosTextoY(2));

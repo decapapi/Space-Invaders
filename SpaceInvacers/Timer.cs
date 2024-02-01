@@ -8,41 +8,44 @@ namespace SpaceInvacers
 {
 	class Timer
 	{
-		private long ultimoTick;
-		private long tickTime;
-		private bool ticked;
+		private Dictionary<string, long> ultimoTick = new Dictionary<string, long>();
+		private Dictionary<string, long> tickTime = new Dictionary<string, long>();
+		private Dictionary<string, bool> ticked = new Dictionary<string, bool>();
 
-		public Timer(int milisegundos)
+		public void Agregar(string nombre, int milisegundos)
 		{
-			tickTime = milisegundos * TimeSpan.TicksPerMillisecond;
-			ultimoTick = DateTime.Now.Ticks;
-			ticked = true;
+			tickTime[nombre] = milisegundos * TimeSpan.TicksPerMillisecond;
+			ultimoTick[nombre] = DateTime.Now.Ticks;
+			ticked[nombre] = true;
 		}
-
-		public Timer() : this(500) { }
 
 		public void Actualizar()
 		{
-			DateTime timpoActual = DateTime.Now;
+			DateTime tiempoActual = DateTime.Now;
 
-			if (timpoActual.Ticks - this.ultimoTick < tickTime)	{
-				this.ticked = false;
-				return;
+			foreach (string nombre in ultimoTick.Keys.ToList()) {
+				if (tiempoActual.Ticks - ultimoTick[nombre] < tickTime[nombre]) {
+					ticked[nombre] = false;
+					continue;
+				}
+
+				ticked[nombre] = true;
+				ultimoTick[nombre] = tiempoActual.Ticks;
 			}
-
-			this.ticked = true;
-
-			ultimoTick = timpoActual.Ticks;
 		}
 
-		public void SetTickTime(int milisegundos)
+		public void SetTickTime(string nombre, int milisegundos)
 		{
-			tickTime = milisegundos * TimeSpan.TicksPerMillisecond;
+			if (!tickTime.ContainsKey(nombre)) 
+				return;
+			tickTime[nombre] = milisegundos * TimeSpan.TicksPerMillisecond;
 		}
 
-		public bool GetTicked()
-		{ 
-			return ticked;
+		public bool GetTicked(string nombre)
+		{
+			if (!ticked.ContainsKey(nombre)) 
+				return false;
+			return ticked[nombre];
 		}
 	}
 }

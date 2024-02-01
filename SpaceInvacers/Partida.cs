@@ -36,19 +36,13 @@ namespace SpaceInvacers
 
 			Proyectil proyectil = new Proyectil();
 
-			List<Timer> timers = new List<Timer>();
+			Timer timer = new Timer();
 
-			Timer timerBloque = new Timer(800 / this.nivel);
-			Timer timerMoverOvni = new Timer(150 / this.nivel);
-			Timer timerDisparoEnemigo = new Timer(1500 / this.nivel);
-			Timer timerActualizarDisparoEnemigo = new Timer(40);
-
-			timers.Add(timerBloque);
-			timers.Add(timerMoverOvni);
-			timers.Add(timerDisparoEnemigo);
-			timers.Add(timerActualizarDisparoEnemigo);
-
-			Timer timerActualizarDisparo = new Timer(60);
+			timer.Agregar("moverBloque", 800 / this.nivel);
+			timer.Agregar("moverOvni", 150 / this.nivel);
+			timer.Agregar("disparoEnemigo", 1500 / this.nivel);
+			timer.Agregar("actualizarDisparo", 60);
+			timer.Agregar("actualizarDisparoEnemigo", 40);
 
 			ConsoleKey tecla;
 			do {
@@ -88,12 +82,10 @@ namespace SpaceInvacers
 				if (bloqueDeEnemigos.GetEnemigosRestantes() <= 0)
 					this.nivelGanado = true;
 
-				foreach (Timer timer in timers)
-					timer.Actualizar();
+				timer.Actualizar();
 
 				if (proyectil.Activo) {
-					timerActualizarDisparo.Actualizar();
-					if (timerActualizarDisparo.GetTicked())
+					if (timer.GetTicked("actualizarDisparo"))
 						proyectil.Mover(false);
 				}
 
@@ -104,16 +96,16 @@ namespace SpaceInvacers
 				if (ovni.GetActivo())
 					ovni.Dibujar();
 
-				if (timerBloque.GetTicked())
+				if (timer.GetTicked("moverBloque"))
 					bloqueDeEnemigos.Mover();
 
-				if (timerMoverOvni.GetTicked())
+				if (timer.GetTicked("moverOvni"))
 					ovni.Mover();
 
-				if (timerActualizarDisparoEnemigo.GetTicked())
+				if (timer.GetTicked("actualizarDisparoEnemigo"))
 					bloqueDeEnemigos.MoverProyectil();
 
-				if (timerDisparoEnemigo.GetTicked())
+				if (timer.GetTicked("disparoEnemigo"))
 					bloqueDeEnemigos.Disparar();
 
 				if (bloqueDeEnemigos.ProyectilColisionaCon(nave))
@@ -166,7 +158,8 @@ namespace SpaceInvacers
 
 		private void MostrarIntro()
 		{
-			Timer timerFondo = new Timer(1000);
+			Timer timer = new Timer();
+			timer.Agregar("fondo", 1000);
 
 			ConsoleKey tecla = ConsoleKey.None;
 			do
@@ -174,7 +167,7 @@ namespace SpaceInvacers
 				if (Console.KeyAvailable)
 					tecla = Console.ReadKey(true).Key;
 
-				if (timerFondo.GetTicked()) {
+				if (timer.GetTicked("fondo")) {
 					Pantalla.ActualizarFondo();
 					Pantalla.TextoCentrado("S P A C E   I N V A D E R S", Pantalla.PosTextoY(-3));
 					Pantalla.TextoCentrado("* TABLA DE PUNTUACIÓN *", Pantalla.PosTextoY());
@@ -185,7 +178,7 @@ namespace SpaceInvacers
 					Pantalla.TextoCentrado("Pulsa cualquier tecla para iniciar", Pantalla.PosTextoY(7));
 				}
 
-				timerFondo.Actualizar();
+				timer.Actualizar();
 			} while (tecla == ConsoleKey.None);
 
 			Pantalla.Limpiar();
@@ -200,14 +193,15 @@ namespace SpaceInvacers
 
 		private void MostrarGameOver()
 		{
-			Timer timer = new Timer(1000);
+			Timer timer = new Timer();
+			timer.Agregar("fondo", 1000);
 
 			ConsoleKey tecla = ConsoleKey.None;
 			do {
 				if (Console.KeyAvailable)
 					tecla = Console.ReadKey(true).Key;
 
-				if (timer.GetTicked()) {
+				if (timer.GetTicked("fondo")) {
 					Pantalla.ActualizarFondo();
 					Pantalla.TextoCentrado("G A M E   O V E R", Pantalla.PosTextoY(), ConsoleColor.Red);
 					Pantalla.TextoCentrado("Pulsa Intro para volver o ESC para salir", Pantalla.PosTextoY(2));
